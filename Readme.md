@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Анастасия Захарова](https://up.htmlacademy.ru/react/16/user/2486211).
-* Наставник: `Неизвестно`.
+* Наставник: [Yulia Volkova](https://htmlacademy.ru/profile/julie_volkova).
 
 ---
 
