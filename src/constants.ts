@@ -4,4 +4,9 @@ const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseld
 
 const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
-export { COUNT_OFFERS, CITIES, PLACES_OPTIONS };
+const CommentLengthLimit = {
+  MIN: 50,
+  MAX: 300
+} as const;
+
+export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit };
