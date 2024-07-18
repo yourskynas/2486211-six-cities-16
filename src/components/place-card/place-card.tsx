@@ -4,16 +4,22 @@ type PlaceOffersProps = {
   previewImage: string;
   price: number;
   isFavorite: boolean;
+  classNameCard: string;
 }
 
-const PlaceCard = ({title, typeOfHousing, previewImage, price, isFavorite}: PlaceOffersProps): JSX.Element => {
+const PlaceCard = ({title, typeOfHousing, previewImage, price, isFavorite, classNameCard}: PlaceOffersProps): JSX.Element => {
   const favoriteClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
 
+  const PlaceCardClass = {
+    FOR_ARTICLE: `${classNameCard }__card place-card`,
+    FOR_DIV: `${classNameCard }__image-wrapper place-card__image-wrapper`
+  };
+
   return (
-    <article className="cities__card place-card">
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={PlaceCardClass.FOR_ARTICLE}>
+      <div className={PlaceCardClass.FOR_DIV}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </a>
