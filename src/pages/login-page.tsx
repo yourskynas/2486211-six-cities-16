@@ -1,4 +1,4 @@
-import HeaderLogo from './header/header-logo';
+import HeaderLogo from '../components/header/header-logo';
 
 const LoginPage = (): JSX.Element => (
   <div className="page page--gray page--login">

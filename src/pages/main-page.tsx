@@ -1,32 +1,11 @@
-import Header from './header/header';
-import LocationsList from './locations/locations-list';
-import CitiesMap from './map/cities-map';
-import PlaceCard from './place-card/place-card';
-import PlacesSorting from './places-sorting/places-sorting';
+import { PlaceOfferType } from '../types';
+import Header from '../components/header/header';
+import LocationsList from '../components/locations/locations-list';
+import CitiesMap from '../components/map/cities-map';
+import PlaceCard from '../components/place-card/place-card';
+import PlacesSorting from '../components/places-sorting/places-sorting';
 
-type PlaceOffersProps = {
-  id: string;
-    title: string;
-    type: string;
-    price: number;
-    previewImage: string;
-    city: {
-        name: string;
-        location: {
-            latitude: number;
-            longitude: number;
-            zoom: number;
-        };
-    };
-    location: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-    };
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-}[];
+type PlaceOffersProps = PlaceOfferType[];
 
 type MainProps = {
   countOffers: number;
@@ -49,7 +28,7 @@ const MainPage = ({countOffers, cities, placesOptions, placeOffers}: MainProps):
             <b className="places__found">{countOffers} places to stay in Amsterdam</b>
             <PlacesSorting placesOptions={placesOptions} />
             <div className="cities__places-list places__list tabs__content">
-              {placeOffers.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} />)}
+              {placeOffers.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} classNameCard={'cities'} />)}
             </div>
           </section>
           <CitiesMap />

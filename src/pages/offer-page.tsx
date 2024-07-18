@@ -1,8 +1,10 @@
-import Header from './header/header';
-import OfferImage from './offer/offer-image';
-import OfferInsideList from './offer/offer-inside-list';
-import OfferReview from './offer/offer-review';
-import OfferPlaceCard from './offer/place-card';
+import Header from '../components/header/header';
+import OfferImage from '../components/offer/offer-image';
+import OfferInsideList from '../components/offer/offer-inside-list';
+import OfferReview from '../components/offer/offer-review';
+import OfferPlaceCard from '../components/offer/place-card';
+
+//TO DO заменить компонент <OfferPlaceCard /> на <PlaceCard classNameCard={'near-places'} /> после реализации роутинга
 
 const OfferPage = (): JSX.Element => (
   <div className="page">
