@@ -2,7 +2,11 @@ type LocationsProps = {
   cities: string[];
 }
 
-const LocationsItem = ({ city }): JSX.Element => {
+type LocationItemProps = {
+  city: string;
+}
+
+const LocationsItem = ({ city }: LocationItemProps): JSX.Element => {
   const classCityItem = city === 'Amsterdam'
     ? 'locations__item-link tabs__item tabs__item--active'
     : 'locations__item-link tabs__item';

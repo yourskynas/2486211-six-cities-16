@@ -2,7 +2,12 @@
 type OptionsProps = {
   placesOptions: string[];
 }
-const PlacesOptions = ({option}): JSX.Element => {
+
+type OptionProps = {
+  option: string;
+}
+
+const PlacesOptions = ({option}: OptionProps): JSX.Element => {
   const optionClass = option === 'Popular'
     ? 'places__option places__option--active'
     : 'places__option';
