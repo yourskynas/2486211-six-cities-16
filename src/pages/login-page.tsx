@@ -6,7 +6,7 @@ const LoginPage = (): JSX.Element => (
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo classNameLogo = 'header__logo' imageWidth = '81' imageHeight = '41'/>
+            <Logo classNameLogo={''} imageWidth={''} imageHeight={''}/>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type LogoProps = {
   classNameLogo: string;
   imageWidth: string;
@@ -12,9 +14,9 @@ const Logo = ({classNameLogo = 'header__logo', imageWidth = '81', imageHeight = 
   };
 
   return (
-    <a className={LogoStyle.FOR_LINK}>
+    <Link to='/' className={LogoStyle.FOR_LINK}>
       <img className={classNameLogo} src="img/logo.svg" alt="6 cities logo" width={LogoStyle.FOR_IMAGE_WIDTH} height={LogoStyle.FOR_IMAGE_HEIGHT}/>
-    </a>
+    </Link>
   );
 };
 
