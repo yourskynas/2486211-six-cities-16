@@ -11,18 +11,31 @@ export type CityType = {
 
 export type PlaceOfferType = {
   id: string;
-    title: string;
-    type: string;
-    price: number;
-    previewImage: string;
-    city: CityType;
-    location: LocationType;
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
+  title: string;
+  type: string;
+  price: number;
+  previewImage?: string;
+  city: CityType;
+  location: LocationType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
 };
 
 export type CommentLengthLimit = {
   MIN: number;
   MAX: number;
+};
+
+export type OfferType = PlaceOfferType & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: string[];
+  maxAdults: number;
 };
