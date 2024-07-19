@@ -1,7 +1,7 @@
 type PlaceOffersProps = {
   title: string;
   typeOfHousing: string;
-  previewImage: string;
+  previewImage?: string;
   price: number;
   isFavorite: boolean;
   classNameCard: string;

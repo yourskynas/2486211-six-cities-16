@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 type LogoProps = {
-  classNameLogo: string;
-  imageWidth: string;
-  imageHeight: string;
+  classNameLogo?: string;
+  imageWidth?: string;
+  imageHeight?: string;
 }
 
 const Logo = ({classNameLogo = 'header__logo', imageWidth = '81', imageHeight = '41'}: LogoProps): JSX.Element => {

@@ -5,7 +5,7 @@ const Header = (): JSX.Element => (
     <div className="container">
       <div className="header__wrapper">
         <div className="header__left">
-          <Logo classNameLogo={''} imageWidth={''} imageHeight={''}/>
+          <Logo />
         </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
