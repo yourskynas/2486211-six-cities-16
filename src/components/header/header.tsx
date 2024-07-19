@@ -1,10 +1,12 @@
-import HeaderLogo from './header-logo';
+import Logo from '../logo/logo';
 
 const Header = (): JSX.Element => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">
-        <HeaderLogo />
+        <div className="header__left">
+          <Logo />
+        </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
             <li className="header__nav-item user">
