@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants';
 
 type LogoProps = {
   classNameLogo?: string;
@@ -14,7 +15,7 @@ const Logo = ({classNameLogo = 'header__logo', imageWidth = '81', imageHeight = 
   };
 
   return (
-    <Link to='/' className={LogoStyle.FOR_LINK}>
+    <Link to={AppRoute.MAIN} className={LogoStyle.FOR_LINK}>
       <img className={classNameLogo} src="img/logo.svg" alt="6 cities logo" width={LogoStyle.FOR_IMAGE_WIDTH} height={LogoStyle.FOR_IMAGE_HEIGHT}/>
     </Link>
   );

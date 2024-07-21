@@ -22,11 +22,6 @@ export type PlaceOfferType = {
   rating: number;
 };
 
-export type CommentLengthLimit = {
-  MIN: number;
-  MAX: number;
-};
-
 export type OfferType = PlaceOfferType & {
   description: string;
   bedrooms: number;

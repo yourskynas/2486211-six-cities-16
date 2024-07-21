@@ -16,4 +16,10 @@ const AppRoute = {
   OFFER: 'offer/:id'
 } as const;
 
-export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute };
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+} as const;
+
+export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };

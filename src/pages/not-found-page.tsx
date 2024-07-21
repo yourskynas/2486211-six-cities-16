@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../components/logo/logo';
+import { AppRoute } from '../constants';
 
 const NotFoundPage = (): JSX.Element => (
   <div className="page page--gray page--login">
@@ -18,7 +19,7 @@ const NotFoundPage = (): JSX.Element => (
         <section className="login">
           <h1 className="login__title">404 | Страница не найдена</h1>
           <div className="login__form form">
-            <Link to='/' className="login__submit form__submit button">Перейти на главную</Link>
+            <Link to={AppRoute.MAIN} className="login__submit form__submit button">Перейти на главную</Link>
           </div>
         </section>
         <section className="locations locations--login locations--current">
