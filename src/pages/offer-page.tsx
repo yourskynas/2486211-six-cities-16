@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../components/header/header';
 import OfferImages from '../components/offer/offer-images';
 import OfferInsideList from '../components/offer/offer-inside-list';
@@ -15,6 +16,9 @@ const OfferPage = ({offer}: OfferProps): JSX.Element => {
   const ratingInProcent = `${(rating * 100) / 5}%`;
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities | Offer </title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">

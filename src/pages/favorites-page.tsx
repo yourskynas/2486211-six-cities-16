@@ -4,6 +4,7 @@ import Logo from '../components/logo/logo';
 import { CITIES } from '../constants';
 import { PlaceOfferType } from '../types';
 import PlaceCard from '../components/place-card/place-card';
+import { Helmet } from 'react-helmet-async';
 
 type FavoritesProps = {
   placeOffers: PlaceOfferType[];
@@ -40,6 +41,9 @@ const FavoriteList = ({placeOffers}: FavoritesProps): JSX.Element => {
 
 const FavoritesPage = ({placeOffers}: FavoritesProps): JSX.Element => (
   <div className="page">
+    <Helmet>
+      <title>6 cities | Favorites</title>
+    </Helmet>
     <Header />
 
     <main className="page__main page__main--favorites">

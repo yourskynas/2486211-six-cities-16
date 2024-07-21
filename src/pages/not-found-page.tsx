@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import Logo from '../components/logo/logo';
 import { AppRoute } from '../constants';
+import { Helmet } from 'react-helmet-async';
 
 const NotFoundPage = (): JSX.Element => (
   <div className="page page--gray page--login">
+    <Helmet>
+      <title>6 cities | Error 404 </title>
+    </Helmet>
     <header className="header">
       <div className="container">
         <div className="header__wrapper">

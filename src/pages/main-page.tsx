@@ -4,6 +4,7 @@ import LocationsList from '../components/locations/locations-list';
 import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
+import { Helmet } from 'react-helmet-async';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -16,6 +17,10 @@ type MainProps = {
 
 const MainPage = ({countOffers, cities, placesOptions, placeOffers}: MainProps): JSX.Element => (
   <div className="page page--gray page--main">
+    <Helmet>
+      <title>6 cities | Main </title>
+    </Helmet>
+
     <Header />
 
     <main className="page__main page__main--index">
