@@ -28,7 +28,7 @@ const NotFoundPage = (): JSX.Element => (
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to="/">
+            <Link className="locations__item-link" to={AppRoute.MAIN}>
               <span>Amsterdam</span>
             </Link>
           </div>

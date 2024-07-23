@@ -30,6 +30,17 @@ const FavoriteItem = ({offersCity}: FavoriteItemProps): JSX.Element => (
 );
 
 const FavoriteList = ({placeOffers}: FavoritesProps): JSX.Element => {
+  // реализовать в следующем ПР =>
+  // const groupByCity = placeOffers.reduce((group, offer) => {
+  //   const city = offer.city.name;
+  //   group[city] = group[city] ?? [];
+
+  //   if (offer && offer.isFavorite) {
+  //     group[city].push(offer);
+  //   }
+  //   return group;
+  // }, {});
+
   const filteredByCities = CITIES.map((city) => placeOffers.filter((offer) => offer && offer.city.name === city && offer.isFavorite));
   const offersCities = filteredByCities.filter((list) => list.length > 0);
   return (

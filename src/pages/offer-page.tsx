@@ -6,6 +6,10 @@ import OfferReview from '../components/offer/offer-review';
 import OfferPlaceCard from '../components/offer/place-card';
 import { OfferType } from '../types';
 
+const procent: number = 100;
+const ratingScale: number = 5;
+
+
 //TO DO заменить компонент <OfferPlaceCard /> на <PlaceCard classNameCard={'near-places'} /> после реализации роутинга
 type OfferProps = {
   offer: OfferType;
@@ -13,7 +17,7 @@ type OfferProps = {
 
 const OfferPage = ({offer}: OfferProps): JSX.Element => {
   const {type, description, price, isFavorite, images, rating, bedrooms, maxAdults, goods} = offer;
-  const ratingInProcent = `${(rating * 100) / 5}%`;
+  const ratingInProcent = `${(rating / ratingScale) * procent}%`;
   return (
     <div className="page">
       <Helmet>
