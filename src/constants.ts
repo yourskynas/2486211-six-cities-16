@@ -9,4 +9,17 @@ const CommentLengthLimit = {
   MAX: 300
 } as const;
 
-export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit };
+const AppRoute = {
+  MAIN: '/',
+  LOGIN: '/login',
+  FAVORITES: '/favorites',
+  OFFER: 'offer/:id'
+} as const;
+
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+} as const;
+
+export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };

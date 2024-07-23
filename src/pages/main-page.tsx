@@ -4,6 +4,7 @@ import LocationsList from '../components/locations/locations-list';
 import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
+import { Helmet } from 'react-helmet-async';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -16,6 +17,10 @@ type MainProps = {
 
 const MainPage = ({countOffers, cities, placesOptions, placeOffers}: MainProps): JSX.Element => (
   <div className="page page--gray page--main">
+    <Helmet>
+      <title>6 cities | Main </title>
+    </Helmet>
+
     <Header />
 
     <main className="page__main page__main--index">
@@ -28,7 +33,7 @@ const MainPage = ({countOffers, cities, placesOptions, placeOffers}: MainProps):
             <b className="places__found">{countOffers} places to stay in Amsterdam</b>
             <PlacesSorting placesOptions={placesOptions} />
             <div className="cities__places-list places__list tabs__content">
-              {placeOffers.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} classNameCard={'cities'} />)}
+              {placeOffers.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} classNameCard={'cities'} imageWidth='260' imageHeight='200'/>)}
             </div>
           </section>
           <CitiesMap />

@@ -1,12 +1,12 @@
-const OfferInsideItem = (): JSX.Element => (
+const OfferInsideItem = ({good}: {good: string}): JSX.Element => (
   <li className="offer__inside-item">
-      Wi-Fi
+    {good}
   </li>
 );
 
-const OfferInsideList = (): JSX.Element => (
+const OfferInsideList = ({goods}: {goods: string[]}): JSX.Element => (
   <ul className="offer__inside-list">
-    <OfferInsideItem />
+    {goods.map((good) => <OfferInsideItem key={good} good={good} />)}
   </ul>
 );
 

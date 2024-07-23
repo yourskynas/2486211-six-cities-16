@@ -39,7 +39,7 @@ const offer = {
     avatarUrl: 'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
   },
   isPremium: false,
-  isFavorite: false,
+  isFavorite: true,
   rating: 3.2,
   bedrooms: 5,
   maxAdults: 2
