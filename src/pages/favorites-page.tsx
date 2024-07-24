@@ -24,7 +24,7 @@ const FavoriteItem = ({offersCity}: FavoriteItemProps): JSX.Element => (
       </div>
     </div>
     <div className="favorites__places">
-      {offersCity.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} classNameCard={'favorites'} imageWidth='150' imageHeight='110'/>)}
+      {offersCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'favorites'} imageWidth='150' imageHeight='110'/>)}
     </div>
   </li>
 );

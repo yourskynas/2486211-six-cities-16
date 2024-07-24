@@ -3,21 +3,20 @@ import Header from '../components/header/header';
 import OfferImages from '../components/offer/offer-images';
 import OfferInsideList from '../components/offer/offer-inside-list';
 import OfferReview from '../components/offer/offer-review';
-import OfferPlaceCard from '../components/offer/place-card';
-import { OfferType } from '../types';
-
-const procent: number = 100;
-const ratingScale: number = 5;
+import { OfferType, PlaceOfferType } from '../types';
+import NearPlaces from '../components/offer/near-places';
+import { ratingInProcent } from '../utils';
 
 
 //TO DO заменить компонент <OfferPlaceCard /> на <PlaceCard classNameCard={'near-places'} /> после реализации роутинга
 type OfferProps = {
   offer: OfferType;
+  placeOffers: PlaceOfferType[];
 }
 
-const OfferPage = ({offer}: OfferProps): JSX.Element => {
+const OfferPage = ({offer, placeOffers}: OfferProps): JSX.Element => {
   const {type, description, price, isFavorite, images, rating, bedrooms, maxAdults, goods} = offer;
-  const ratingInProcent = `${(rating / ratingScale) * procent}%`;
+  const ratingStars = ratingInProcent(rating);
   return (
     <div className="page">
       <Helmet>
@@ -51,7 +50,7 @@ const OfferPage = ({offer}: OfferProps): JSX.Element => {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: ratingInProcent}}></span>
+                  <span style={{width: ratingStars}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{rating}</span>
@@ -130,12 +129,7 @@ const OfferPage = ({offer}: OfferProps): JSX.Element => {
           <section className="offer__map map"></section>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <OfferPlaceCard />
-            </div>
-          </section>
+          <NearPlaces placeOffers={placeOffers} />
         </div>
       </main>
     </div>

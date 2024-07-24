@@ -40,7 +40,7 @@ const App = ({countOffers, cities, placesOptions, placeOffers, offer}: AppProps)
         />
         <Route
           path={AppRoute.OFFER}
-          element={<OfferPage offer={offer}/>}
+          element={<OfferPage offer={offer} placeOffers={placeOffers}/>}
         />
         <Route
           path={AppRoute.FAVORITES}

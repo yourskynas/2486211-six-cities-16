@@ -1,15 +1,22 @@
+import { PlaceOfferType } from '../../types';
+import { ratingInProcent } from '../../utils';
+
 type PlaceOffersProps = {
-  title: string;
-  typeOfHousing: string;
-  previewImage?: string;
-  price: number;
-  isFavorite: boolean;
+  placeOffer: PlaceOfferType;
   classNameCard: string;
   imageWidth: string;
   imageHeight: string;
 }
 
-const PlaceCard = ({title, typeOfHousing, previewImage, price, isFavorite, classNameCard, imageWidth, imageHeight}: PlaceOffersProps): JSX.Element => {
+const PremiumMark = (): JSX.Element => (
+  <div className="place-card__mark">
+    <span>Premium</span>
+  </div>
+);
+
+const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight}: PlaceOffersProps): JSX.Element => {
+  const {title, type: typeOfHousing, price, previewImage, isFavorite, rating, isPremium} = placeOffer;
+  const ratingStars = ratingInProcent(rating);
   const favoriteClass = isFavorite
     ? 'place-card__bookmark-button place-card__bookmark-button--active button'
     : 'place-card__bookmark-button button';
@@ -21,6 +28,7 @@ const PlaceCard = ({title, typeOfHousing, previewImage, price, isFavorite, class
 
   return (
     <article className={PlaceCardStyle.FOR_ARTICLE}>
+      {isPremium ? <PremiumMark /> : ''}
       <div className={PlaceCardStyle.FOR_DIV}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt="Place image"/>
@@ -41,7 +49,7 @@ const PlaceCard = ({title, typeOfHousing, previewImage, price, isFavorite, class
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: ratingStars}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
