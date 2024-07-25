@@ -12,14 +12,13 @@ import { HelmetProvider } from 'react-helmet-async';
 type PlaceOffersProps = PlaceOfferType[];
 
 type AppProps = {
-  countOffers: number;
   cities: string[];
   placesOptions: string[];
   placeOffers: PlaceOffersProps;
   offer: OfferType;
 }
 
-const App = ({countOffers, cities, placesOptions, placeOffers, offer}: AppProps): JSX.Element => (
+const App = ({cities, placesOptions, placeOffers, offer}: AppProps): JSX.Element => (
   <HelmetProvider>
     <BrowserRouter>
       <Routes>
@@ -27,7 +26,6 @@ const App = ({countOffers, cities, placesOptions, placeOffers, offer}: AppProps)
           path={AppRoute.MAIN}
           element={
             <MainPage
-              countOffers={countOffers}
               cities={cities}
               placesOptions={placesOptions}
               placeOffers={placeOffers}
