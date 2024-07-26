@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 import Logo from '../logo/logo';
 
 type HeaderProps = {
-  user?: boolean;
+  authorizationStatus?: keyof typeof AuthorizationStatus;
 }
 
 const NavForUser = (): JSX.Element => (
@@ -24,15 +26,15 @@ const NavForUser = (): JSX.Element => (
 
 const NavForLogin = (): JSX.Element => (
   <li className="header__nav-item user">
-    <a className="header__nav-link header__nav-link--profile" href="#">
+    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.LOGIN}>
       <div className="header__avatar-wrapper user__avatar-wrapper">
       </div>
       <span className="header__login">Sign in</span>
-    </a>
+    </Link>
   </li>
 );
 
-const Header = ({user = true}: HeaderProps): JSX.Element => (
+const Header = ({authorizationStatus}: HeaderProps): JSX.Element => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -41,7 +43,7 @@ const Header = ({user = true}: HeaderProps): JSX.Element => (
         </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
-            {user ? <NavForUser /> : <NavForLogin />}
+            {authorizationStatus === AuthorizationStatus.AUTH ? <NavForUser /> : <NavForLogin />}
           </ul>
         </nav>
       </div>

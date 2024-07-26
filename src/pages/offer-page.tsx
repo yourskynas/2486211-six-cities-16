@@ -8,14 +8,16 @@ import { ratingInProcent } from '../utils';
 import OfferHost from '../components/offer/offer-host';
 import Reviews from '../components/offer/reviews';
 import ReviewForm from '../components/offer/review-form';
+import { AuthorizationStatus } from '../constants';
 
 type OfferProps = {
   offer: OfferType;
   placeOffers: PlaceOfferType[];
   reviews: ReviewType[];
+  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const OfferPage = ({offer, placeOffers, reviews}: OfferProps): JSX.Element => {
+const OfferPage = ({offer, placeOffers, reviews, authorizationStatus}: OfferProps): JSX.Element => {
   const {type, title, description, price, isFavorite, images, rating, bedrooms, maxAdults, goods, host} = offer;
   const ratingStars = ratingInProcent(rating);
   return (
@@ -23,7 +25,7 @@ const OfferPage = ({offer, placeOffers, reviews}: OfferProps): JSX.Element => {
       <Helmet>
         <title>6 cities | Offer </title>
       </Helmet>
-      <Header />
+      <Header authorizationStatus={authorizationStatus}/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
