@@ -1,4 +1,4 @@
-import { OfferType, PlaceOfferType } from '../../types';
+import { OfferType, PlaceOfferType, ReviewType } from '../../types';
 import MainPage from '../../pages/main-page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
@@ -16,9 +16,10 @@ type AppProps = {
   placesOptions: string[];
   placeOffers: PlaceOffersProps;
   offer: OfferType;
+  reviews: ReviewType[];
 }
 
-const App = ({cities, placesOptions, placeOffers, offer}: AppProps): JSX.Element => (
+const App = ({cities, placesOptions, placeOffers, offer, reviews}: AppProps): JSX.Element => (
   <HelmetProvider>
     <BrowserRouter>
       <Routes>
@@ -38,7 +39,7 @@ const App = ({cities, placesOptions, placeOffers, offer}: AppProps): JSX.Element
         />
         <Route
           path={AppRoute.OFFER}
-          element={<OfferPage offer={offer} placeOffers={placeOffers}/>}
+          element={<OfferPage offer={offer} placeOffers={placeOffers} reviews={reviews}/>}
         />
         <Route
           path={AppRoute.FAVORITES}
