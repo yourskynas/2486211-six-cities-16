@@ -6,6 +6,8 @@ type PlaceOffersProps = {
   classNameCard: string;
   imageWidth: string;
   imageHeight: string;
+  onOfferClick?: (value: string) => void;
+  onOfferTarget?: (value: string) => void;
 }
 
 const PremiumMark = (): JSX.Element => (
@@ -14,7 +16,7 @@ const PremiumMark = (): JSX.Element => (
   </div>
 );
 
-const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight}: PlaceOffersProps): JSX.Element => {
+const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferClick, onOfferTarget}: PlaceOffersProps): JSX.Element => {
   const {title, type: typeOfHousing, price, previewImage, isFavorite, rating, isPremium} = placeOffer;
   const ratingStars = ratingInProcent(rating);
   const favoriteClass = isFavorite
@@ -27,7 +29,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight}: PlaceOf
   };
 
   return (
-    <article className={PlaceCardStyle.FOR_ARTICLE}>
+    <article className={PlaceCardStyle.FOR_ARTICLE} onClick={() => onOfferClick(placeOffer.id)} onMouseOver={() => onOfferTarget(placeOffer.id)}>
       {isPremium ? <PremiumMark /> : ''}
       <div className={PlaceCardStyle.FOR_DIV}>
         <a href="#">

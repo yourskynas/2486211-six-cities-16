@@ -8,6 +8,7 @@ import FavoritesPage from '../../pages/favorites-page';
 import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
+import { useState } from 'react';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -17,45 +18,69 @@ type AppProps = {
   placeOffers: PlaceOffersProps;
   offer: OfferType;
   reviews: ReviewType[];
+  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const App = ({cities, placesOptions, placeOffers, offer, reviews}: AppProps): JSX.Element => (
-  <HelmetProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.MAIN}
-          element={
-            <MainPage
-              cities={cities}
-              placesOptions={placesOptions}
-              placeOffers={placeOffers}
-            />
-          }
-        />
-        <Route
-          path={AppRoute.LOGIN}
-          element={<LoginPage />}
-        />
-        <Route
-          path={AppRoute.OFFER}
-          element={<OfferPage offer={offer} placeOffers={placeOffers} reviews={reviews}/>}
-        />
-        <Route
-          path={AppRoute.FAVORITES}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NO_AUTH} >
-              <FavoritesPage placeOffers={placeOffers} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-      </Routes>
-    </BrowserRouter>
-  </HelmetProvider>
-);
+const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
+  const [clickedOffer, setClickedOffer] = useState('');
+  const [targetOffer, setTargetOffer] = useState('');
+
+  const onOfferClick = (value: string) => {
+    setClickedOffer(value);
+  };
+
+  const onOfferTarget = (value: string) => {
+    setTargetOffer(value);
+  };
+
+  return (
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.MAIN}
+            element={
+              <MainPage
+                cities={cities}
+                placesOptions={placesOptions}
+                placeOffers={placeOffers}
+                onOfferClick={onOfferClick}
+                onOfferTarget={onOfferTarget}
+                authorizationStatus={authorizationStatus}
+              />
+            }
+          />
+          <Route
+            path={AppRoute.LOGIN}
+            element={<LoginPage />}
+          />
+          <Route
+            path={AppRoute.OFFER}
+            element={
+              <OfferPage
+                offer={offer}
+                placeOffers={placeOffers}
+                reviews={reviews}
+                authorizationStatus={authorizationStatus}
+              />
+            }
+          />
+          <Route
+            path={AppRoute.FAVORITES}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus} >
+                <FavoritesPage placeOffers={placeOffers} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
+  );
+};
 
 export default App;
