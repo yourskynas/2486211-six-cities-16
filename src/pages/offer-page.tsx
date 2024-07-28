@@ -80,7 +80,7 @@ const OfferPage = ({offer, placeOffers, reviews, authorizationStatus}: OfferProp
               <OfferHost description={description} host={host} />
               <section className="offer__reviews reviews">
                 {reviews.length > 0 ? <Reviews reviews={reviews} /> : ''}
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm /> : ''}
               </section>
             </div>
           </div>
