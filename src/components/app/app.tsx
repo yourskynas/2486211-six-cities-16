@@ -9,6 +9,7 @@ import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState } from 'react';
+import TemplatePage from '../../pages/template-page';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -37,42 +38,44 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.MAIN(currentCity)}
-            element={
-              <MainPage
-                cities={cities}
-                placesOptions={placesOptions}
-                placeOffers={placeOffers}
-                onOfferHover={handleArticleMouseEnter}
-                onCityClick={handleCityLinkClick}
-                currentCity={currentCity}
-                authorizationStatus={authorizationStatus}
-              />
-            }
-          />
+          <Route element={<TemplatePage authorizationStatus={authorizationStatus} currentCity={currentCity}/>}>
+            <Route
+              path={AppRoute.MAIN(currentCity)}
+              element={
+                <MainPage
+                  cities={cities}
+                  placesOptions={placesOptions}
+                  placeOffers={placeOffers}
+                  onOfferHover={handleArticleMouseEnter}
+                  onCityClick={handleCityLinkClick}
+                  currentCity={currentCity}
+                />
+              }
+            />
+            <Route
+              path={AppRoute.OFFER(activeOffer)}
+              element={
+                <OfferPage
+                  offer={offer}
+                  placeOffers={placeOffers}
+                  reviews={reviews}
+                  authorizationStatus={authorizationStatus}
+                />
+              }
+            />
+            <Route
+              path={AppRoute.FAVORITES}
+              element={
+                <PrivateRoute authorizationStatus={authorizationStatus} >
+                  <FavoritesPage placeOffers={placeOffers} />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+
           <Route
             path={AppRoute.LOGIN}
             element={<LoginPage />}
-          />
-          <Route
-            path={AppRoute.OFFER(activeOffer)}
-            element={
-              <OfferPage
-                offer={offer}
-                placeOffers={placeOffers}
-                reviews={reviews}
-                authorizationStatus={authorizationStatus}
-              />
-            }
-          />
-          <Route
-            path={AppRoute.FAVORITES}
-            element={
-              <PrivateRoute authorizationStatus={authorizationStatus} >
-                <FavoritesPage placeOffers={placeOffers} authorizationStatus={authorizationStatus} />
-              </PrivateRoute>
-            }
           />
           <Route
             path="*"

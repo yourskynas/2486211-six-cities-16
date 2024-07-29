@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import Header from '../components/header/header';
 import OfferImages from '../components/offer/offer-images';
 import OfferInsideList from '../components/offer/offer-inside-list';
 import { OfferType, PlaceOfferType, ReviewType } from '../types';
@@ -21,11 +20,10 @@ const OfferPage = ({offer, placeOffers, reviews, authorizationStatus}: OfferProp
   const {type, title, description, price, isFavorite, images, rating, bedrooms, maxAdults, goods, host} = offer;
   const ratingStars = ratingInProcent(rating);
   return (
-    <div className="page">
+    <>
       <Helmet>
         <title>6 cities | Offer </title>
       </Helmet>
-      <Header authorizationStatus={authorizationStatus}/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -90,7 +88,7 @@ const OfferPage = ({offer, placeOffers, reviews, authorizationStatus}: OfferProp
           <NearPlaces placeOffers={placeOffers} />
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

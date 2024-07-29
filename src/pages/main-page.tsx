@@ -1,12 +1,10 @@
 import { PlaceOfferType } from '../types';
-import Header from '../components/header/header';
 import LocationsList from '../components/locations/locations-list';
 import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
 import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
-import { AuthorizationStatus } from '../constants';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -17,10 +15,9 @@ type MainProps = {
   onOfferHover: (value: string) => void;
   onCityClick: (value: string) => void;
   currentCity: string;
-  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClick, currentCity, authorizationStatus}: MainProps): JSX.Element => {
+const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClick, currentCity}: MainProps): JSX.Element => {
 
   const groupByCity = placeOffers.reduce((group, offer) => {
     const city = offer.city.name;
@@ -32,12 +29,10 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
   const groupedOffersByCity = groupByCity[currentCity];
 
   return (
-    <div className="page page--gray page--main">
+    <>
       <Helmet>
         <title>6 cities | Main </title>
       </Helmet>
-
-      <Header authorizationStatus={authorizationStatus}/>
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -59,7 +54,7 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
             ) : <EmptyMain city={currentCity}/> }
         </div>
       </main>
-    </div>
+    </>
   );
 };
 
