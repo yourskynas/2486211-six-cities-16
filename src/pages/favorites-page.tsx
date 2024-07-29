@@ -1,13 +1,14 @@
 import { nanoid } from '@reduxjs/toolkit';
 import Header from '../components/header/header';
 import Logo from '../components/logo/logo';
-import { CITIES } from '../constants';
+import { AuthorizationStatus, CITIES } from '../constants';
 import { PlaceOfferType } from '../types';
 import PlaceCard from '../components/place-card/place-card';
 import { Helmet } from 'react-helmet-async';
 
 type FavoritesProps = {
   placeOffers: PlaceOfferType[];
+  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
 type FavoriteItemProps = {
@@ -50,12 +51,12 @@ const FavoriteList = ({placeOffers}: FavoritesProps): JSX.Element => {
   );
 };
 
-const FavoritesPage = ({placeOffers}: FavoritesProps): JSX.Element => (
+const FavoritesPage = ({placeOffers, authorizationStatus}: FavoritesProps): JSX.Element => (
   <div className="page">
     <Helmet>
       <title>6 cities | Favorites</title>
     </Helmet>
-    <Header />
+    <Header authorizationStatus={authorizationStatus}/>
 
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">

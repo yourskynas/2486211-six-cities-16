@@ -70,7 +70,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
             path={AppRoute.FAVORITES}
             element={
               <PrivateRoute authorizationStatus={authorizationStatus} >
-                <FavoritesPage placeOffers={placeOffers} />
+                <FavoritesPage placeOffers={placeOffers} authorizationStatus={authorizationStatus} />
               </PrivateRoute>
             }
           />
