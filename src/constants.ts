@@ -11,7 +11,7 @@ const AppRoute = {
   MAIN: (cityName: string) => `/city/:${cityName}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: (id: string) => `offer/:id${id}`,
+  OFFER: (id: string) => `/offer/:id${id}`,
 } as const;
 
 const AuthorizationStatus = {
