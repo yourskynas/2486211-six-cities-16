@@ -26,11 +26,7 @@ export type OfferType = PlaceOfferType & {
   description: string;
   bedrooms: number;
   goods: string[];
-  host: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+  host: User;
   images: string[];
   maxAdults: number;
 };
@@ -38,11 +34,13 @@ export type OfferType = PlaceOfferType & {
 export type ReviewType = {
   id: string;
   date: string;
-  user: {
+  user: User;
+  comment: string;
+  rating: number;
+};
+
+export type User = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
-  };
-  comment: string;
-  rating: number;
 };

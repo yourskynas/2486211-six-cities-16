@@ -1,10 +1,8 @@
+import { User } from '../../types';
+
 type HostProps = {
   description: string;
-  host: {
-    isPro: boolean;
-    name: string;
-    avatarUrl: string;
-  };
+  host: User;
 }
 
 const OfferHost = ({description, host}: HostProps): JSX.Element => {

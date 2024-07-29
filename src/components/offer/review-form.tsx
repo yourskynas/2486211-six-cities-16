@@ -14,7 +14,7 @@ const ReviewForm = (): JSX.Element => {
   const [valueTextarea, setTextarea] = useState('');
   const [valueRating, setRating] = useState('');
 
-  const onRating = (value: string) => {
+  const onRatingClick = (value: string) => {
     setRating(value);
   };
 
@@ -27,7 +27,7 @@ const ReviewForm = (): JSX.Element => {
     <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => evt.preventDefault()}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        <OfferRating onRating={onRating} valueRating={valueRating} />
+        <OfferRating onRatingClick={onRatingClick} valueRating={valueRating} />
       </div>
       <textarea
         className="reviews__textarea form__textarea"

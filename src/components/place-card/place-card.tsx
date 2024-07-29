@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom';
 import { PlaceOfferType } from '../../types';
 import { ratingInProcent } from '../../utils';
+import { AppRoute } from '../../constants';
 
 type PlaceOffersProps = {
   placeOffer: PlaceOfferType;
   classNameCard: string;
   imageWidth: string;
   imageHeight: string;
-  onOfferClick?: (value: string) => void;
-  onOfferTarget?: (value: string) => void;
+  onOfferHover?: (value: string) => void;
 }
 
 const PremiumMark = (): JSX.Element => (
@@ -16,7 +17,7 @@ const PremiumMark = (): JSX.Element => (
   </div>
 );
 
-const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferClick, onOfferTarget}: PlaceOffersProps): JSX.Element => {
+const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferHover}: PlaceOffersProps): JSX.Element => {
   const {title, type: typeOfHousing, price, previewImage, isFavorite, rating, isPremium} = placeOffer;
   const ratingStars = ratingInProcent(rating);
   const favoriteClass = isFavorite
@@ -28,13 +29,25 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferC
     FOR_DIV: `${classNameCard }__image-wrapper place-card__image-wrapper`
   };
 
+  const handleCardMouseEnter = (id: string): void => {
+    if (onOfferHover) {
+      onOfferHover(id);
+    }
+  };
+
+  const handleCardMouseLeave = (): void => {
+    if (onOfferHover) {
+      onOfferHover('');
+    }
+  };
+
   return (
-    <article className={PlaceCardStyle.FOR_ARTICLE} onClick={() => onOfferClick(placeOffer.id)} onMouseOver={() => onOfferTarget(placeOffer.id)}>
+    <article className={PlaceCardStyle.FOR_ARTICLE} onMouseLeave={() => handleCardMouseLeave()} onMouseEnter={() => handleCardMouseEnter(placeOffer.id)}>
       {isPremium ? <PremiumMark /> : ''}
       <div className={PlaceCardStyle.FOR_DIV}>
-        <a href="#">
+        <Link to={AppRoute.OFFER(placeOffer.id)}>
           <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

@@ -18,7 +18,7 @@ root.render(
       placeOffers = {placeOffers}
       offer = {offer}
       reviews={reviews}
-      authorizationStatus={AuthorizationStatus.NO_AUTH}
+      authorizationStatus={AuthorizationStatus.AUTH}
     />
   </React.StrictMode>
 );

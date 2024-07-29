@@ -22,15 +22,15 @@ type AppProps = {
 }
 
 const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
-  const [clickedOffer, setClickedOffer] = useState('');
-  const [targetOffer, setTargetOffer] = useState('');
+  const [activeOffer, setActiveOffer] = useState('');
+  const [currentCity, setCurrentCity] = useState('Paris');
 
-  const onOfferClick = (value: string) => {
-    setClickedOffer(value);
+  const handleArticleMouseEnter = (value: string) => {
+    setActiveOffer(value);
   };
 
-  const onOfferTarget = (value: string) => {
-    setTargetOffer(value);
+  const handleCityLinkClick = (value: string) => {
+    setCurrentCity(value);
   };
 
   return (
@@ -38,14 +38,15 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
       <BrowserRouter>
         <Routes>
           <Route
-            path={AppRoute.MAIN}
+            path={AppRoute.MAIN(currentCity)}
             element={
               <MainPage
                 cities={cities}
                 placesOptions={placesOptions}
                 placeOffers={placeOffers}
-                onOfferClick={onOfferClick}
-                onOfferTarget={onOfferTarget}
+                onOfferHover={handleArticleMouseEnter}
+                onCityClick={handleCityLinkClick}
+                currentCity={currentCity}
                 authorizationStatus={authorizationStatus}
               />
             }
@@ -55,7 +56,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
             element={<LoginPage />}
           />
           <Route
-            path={AppRoute.OFFER}
+            path={AppRoute.OFFER(activeOffer)}
             element={
               <OfferPage
                 offer={offer}
@@ -75,7 +76,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
           />
           <Route
             path="*"
-            element={<NotFoundPage />}
+            element={<NotFoundPage city={currentCity}/>}
           />
         </Routes>
       </BrowserRouter>

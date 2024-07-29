@@ -6,7 +6,7 @@ type HeaderProps = {
   authorizationStatus?: keyof typeof AuthorizationStatus;
 }
 
-const NavForUser = (): JSX.Element => (
+const NavigateForUser = (): JSX.Element => (
   <>
     <li className="header__nav-item user">
       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
@@ -17,14 +17,14 @@ const NavForUser = (): JSX.Element => (
       </Link>
     </li>
     <li className="header__nav-item">
-      <a className="header__nav-link" href="#">
+      <Link className="header__nav-link" to={AppRoute.LOGIN}>
         <span className="header__signout">Sign out</span>
-      </a>
+      </Link>
     </li>
   </>
 );
 
-const NavForLogin = (): JSX.Element => (
+const NavigateForLogin = (): JSX.Element => (
   <li className="header__nav-item user">
     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.LOGIN}>
       <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -43,7 +43,7 @@ const Header = ({authorizationStatus}: HeaderProps): JSX.Element => (
         </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
-            {authorizationStatus === AuthorizationStatus.AUTH ? <NavForUser /> : <NavForLogin />}
+            {authorizationStatus === AuthorizationStatus.AUTH ? <NavigateForUser /> : <NavigateForLogin />}
           </ul>
         </nav>
       </div>
