@@ -28,13 +28,15 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
 
   const groupedOffersByCity = groupByCity[currentCity];
 
+  const classNameMainElement = groupedOffersByCity ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty';
+
   return (
     <>
       <Helmet>
         <title>6 cities | Main </title>
       </Helmet>
 
-      <main className="page__main page__main--index">
+      <main className={classNameMainElement}>
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList cities={cities} onCityClick={onCityClick} currentCity={currentCity}/>
         <div className="cities">
@@ -51,7 +53,7 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
                 </section>
                 <CitiesMap />
               </div>
-            ) : <EmptyMain city={currentCity}/> }
+            ) : <EmptyMain city={currentCity} /> }
         </div>
       </main>
     </>

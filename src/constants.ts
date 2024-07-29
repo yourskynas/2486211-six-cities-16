@@ -8,7 +8,7 @@ const CommentLengthLimit = {
 } as const;
 
 const AppRoute = {
-  MAIN: (cityName: string) => `/${cityName}`,
+  MAIN: (cityName: string) => `/city/:${cityName}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
   OFFER: (id: string) => `offer/:id${id}`,

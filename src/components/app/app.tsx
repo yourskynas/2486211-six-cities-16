@@ -38,8 +38,9 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<TemplatePage authorizationStatus={authorizationStatus} currentCity={currentCity}/>}>
+          <Route element={<TemplatePage authorizationStatus={authorizationStatus} />}>
             <Route
+              index
               path={AppRoute.MAIN(currentCity)}
               element={
                 <MainPage
