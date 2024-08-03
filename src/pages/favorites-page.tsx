@@ -1,5 +1,4 @@
 import { nanoid } from '@reduxjs/toolkit';
-import Header from '../components/header/header';
 import Logo from '../components/logo/logo';
 import { CITIES } from '../constants';
 import { PlaceOfferType } from '../types';
@@ -24,7 +23,7 @@ const FavoriteItem = ({offersCity}: FavoriteItemProps): JSX.Element => (
       </div>
     </div>
     <div className="favorites__places">
-      {offersCity.map((offer) => <PlaceCard key={offer.id} title={offer.title} typeOfHousing={offer.type} previewImage={offer.previewImage} price={offer.price} isFavorite={offer.isFavorite} classNameCard={'favorites'} imageWidth='150' imageHeight='110'/>)}
+      {offersCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'favorites'} imageWidth='150' imageHeight='110'/>)}
     </div>
   </li>
 );
@@ -51,11 +50,10 @@ const FavoriteList = ({placeOffers}: FavoritesProps): JSX.Element => {
 };
 
 const FavoritesPage = ({placeOffers}: FavoritesProps): JSX.Element => (
-  <div className="page">
+  <>
     <Helmet>
       <title>6 cities | Favorites</title>
     </Helmet>
-    <Header />
 
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
@@ -68,7 +66,7 @@ const FavoritesPage = ({placeOffers}: FavoritesProps): JSX.Element => (
     <footer className="footer container">
       <Logo classNameLogo='footer__logo' imageWidth='64' imageHeight='33' />
     </footer>
-  </div>
+  </>
 );
 
 export default FavoritesPage;

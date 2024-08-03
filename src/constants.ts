@@ -1,5 +1,3 @@
-const COUNT_OFFERS = 310;
-
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
@@ -10,10 +8,10 @@ const CommentLengthLimit = {
 } as const;
 
 const AppRoute = {
-  MAIN: '/',
+  MAIN: (cityName: string) => `/city/:${cityName}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: 'offer/:id'
+  OFFER: (id: string) => `/offer/:id${id}`,
 } as const;
 
 const AuthorizationStatus = {
@@ -22,4 +20,4 @@ const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
-export { COUNT_OFFERS, CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };
+export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };
