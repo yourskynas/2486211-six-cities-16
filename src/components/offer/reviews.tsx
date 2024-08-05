@@ -1,6 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { ReviewType } from '../../types';
-import { formatDate, ratingInProcent } from '../../utils';
+import { humanizingDate, ratingInProcent } from '../../utils';
 
 type ReviewsProps = {
   reviews: ReviewType[];
@@ -13,7 +13,7 @@ type ReviewItem = {
 const ReviewItem = ({review}: ReviewItem): JSX.Element => {
   const { date, user, comment, rating } = review;
   const ratingStars = ratingInProcent(rating);
-  const formattedDate = formatDate(date);
+  const formattedDate = humanizingDate(date);
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
