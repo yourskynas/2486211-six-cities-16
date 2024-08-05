@@ -3,11 +3,7 @@ import Logo from '../components/logo/logo';
 import { AppRoute } from '../constants';
 import { Helmet } from 'react-helmet-async';
 
-type NotFoundPageProps = {
-  city: string;
-}
-
-const NotFoundPage = ({city}: NotFoundPageProps): JSX.Element => (
+const NotFoundPage = (): JSX.Element => (
   <div className="page page--gray page--login">
     <Helmet>
       <title>6 cities | Error 404 </title>
@@ -27,12 +23,12 @@ const NotFoundPage = ({city}: NotFoundPageProps): JSX.Element => (
         <section className="login">
           <h1 className="login__title">404 | Страница не найдена</h1>
           <div className="login__form form">
-            <Link to={AppRoute.MAIN(city)} className="login__submit form__submit button">Перейти на главную</Link>
+            <Link to={AppRoute.DEFAULT_MAIN} className="login__submit form__submit button">Перейти на главную</Link>
           </div>
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={AppRoute.MAIN(city)}>
+            <Link className="locations__item-link" to={AppRoute.DEFAULT_MAIN}>
               <span>Amsterdam</span>
             </Link>
           </div>

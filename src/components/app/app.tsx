@@ -1,7 +1,7 @@
 import { OfferType, PlaceOfferType, ReviewType } from '../../types';
 import MainPage from '../../pages/main-page';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus, CITIES, DEFAULT_CITY } from '../../constants';
 import LoginPage from '../../pages/login-page';
 import OfferPage from '../../pages/offer-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -24,7 +24,7 @@ type AppProps = {
 
 const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState('');
-  const [currentCity, setCurrentCity] = useState('Paris');
+  const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
@@ -39,22 +39,24 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
       <BrowserRouter>
         <Routes>
           <Route element={<TemplatePage authorizationStatus={authorizationStatus} />}>
+            <Route index element={<Navigate to={AppRoute.DEFAULT_MAIN} />} />
+            {CITIES.map((city) => (
+              <Route path={`city/${city.toLowerCase()}`}
+                key={city} element={
+                  <MainPage
+                    cities={cities}
+                    placesOptions={placesOptions}
+                    placeOffers={placeOffers}
+                    onOfferHover={handleArticleMouseEnter}
+                    onCityClick={handleCityLinkClick}
+                    currentCity={currentCity}
+                    activeOffer={activeOffer}
+                  />
+                }
+              />
+            ))}
             <Route
-              index
-              path={AppRoute.MAIN(currentCity)}
-              element={
-                <MainPage
-                  cities={cities}
-                  placesOptions={placesOptions}
-                  placeOffers={placeOffers}
-                  onOfferHover={handleArticleMouseEnter}
-                  onCityClick={handleCityLinkClick}
-                  currentCity={currentCity}
-                />
-              }
-            />
-            <Route
-              path={AppRoute.OFFER(activeOffer)}
+              path={AppRoute.OFFER}
               element={
                 <OfferPage
                   offer={offer}
@@ -80,7 +82,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
           />
           <Route
             path="*"
-            element={<NotFoundPage city={currentCity}/>}
+            element={<NotFoundPage />}
           />
         </Routes>
       </BrowserRouter>

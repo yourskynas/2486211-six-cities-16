@@ -45,7 +45,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
     <article className={PlaceCardStyle.FOR_ARTICLE} onMouseLeave={() => handleCardMouseLeave()} onMouseEnter={() => handleCardMouseEnter(placeOffer.id)}>
       {isPremium ? <PremiumMark /> : ''}
       <div className={PlaceCardStyle.FOR_DIV}>
-        <Link to={AppRoute.OFFER(placeOffer.id)}>
+        <Link to={`${AppRoute.OFFER}${placeOffer.id}`}>
           <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt="Place image"/>
         </Link>
       </div>

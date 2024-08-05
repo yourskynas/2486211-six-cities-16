@@ -39,10 +39,6 @@ const ReviewForm = (): JSX.Element => {
         onChange={(e) => setTextarea(e.target.value)}
       >
       </textarea>
-      {!validTextarea
-        ? (
-          <p className="reviews__help" style={{color: 'red'}}>The length of the comment must be from 50 to 300 characters.</p>
-        ) : ''}
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentLengthLimit.MIN} characters</b>.

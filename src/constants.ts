@@ -1,5 +1,7 @@
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
+const DEFAULT_CITY = 'Paris';
+
 const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 const CommentLengthLimit = {
@@ -8,10 +10,11 @@ const CommentLengthLimit = {
 } as const;
 
 const AppRoute = {
-  MAIN: (cityName: string) => `/city/:${cityName}`,
+  DEFAULT_MAIN: 'city/paris',
+  MAIN: (cityName: string) => `/city/${cityName.toLowerCase()}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: (id: string) => `/offer/:id${id}`,
+  OFFER: '/offer/:id',
 } as const;
 
 const AuthorizationStatus = {
@@ -20,4 +23,4 @@ const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
-export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };
+export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY };

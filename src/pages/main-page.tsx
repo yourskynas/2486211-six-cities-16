@@ -1,11 +1,10 @@
-import { PlaceOfferType } from '../types';
+import { CityName, PlaceOfferType } from '../types';
 import LocationsList from '../components/locations/locations-list';
 import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
 import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
-import { CITIES } from '../constants';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -15,12 +14,11 @@ type MainProps = {
   placeOffers: PlaceOffersProps;
   onOfferHover: (value: string) => void;
   onCityClick: (value: string) => void;
-  currentCity: string;
+  currentCity: CityName;
+  activeOffer: string;
 }
 
-type CityName = typeof CITIES[number];
-
-const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClick, currentCity}: MainProps): JSX.Element => {
+const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClick, currentCity, activeOffer}: MainProps): JSX.Element => {
 
   const groupByCity = placeOffers.reduce((group: Record<CityName, PlaceOfferType[]>, offer: PlaceOfferType) => {
     const city = offer.city.name;

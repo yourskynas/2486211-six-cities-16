@@ -20,7 +20,7 @@ const LocationsItem = ({ city, onCityClick, currentCity }: LocationItemProps): J
     : 'locations__item-link tabs__item';
   return (
     <li onClick={() => onCityClick(city)} className="locations__item">
-      <Link className={classCityItem} to={AppRoute.MAIN(currentCity)}>
+      <Link className={classCityItem} to={AppRoute.MAIN(city.toLowerCase())}>
         <span>{city}</span>
       </Link>
     </li>

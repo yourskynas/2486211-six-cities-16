@@ -1,3 +1,5 @@
+import { CITIES } from './constants';
+
 export type LocationType = {
   latitude: number;
   longitude: number;
@@ -44,3 +46,5 @@ export type User = {
   avatarUrl: string;
   isPro: boolean;
 };
+
+export type CityName = typeof CITIES[number];
