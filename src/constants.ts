@@ -1,3 +1,5 @@
+import { MapIconsType, TileLayerType } from './types';
+
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const DEFAULT_CITY = 'Paris';
@@ -23,4 +25,27 @@ const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
-export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY };
+const UrlMarker = {
+  DEFAULT: 'img/pin.svg',
+  CURRENT: 'img/pin-active.svg'
+} as const;
+
+const MapIcon: MapIconsType = {
+  DEFAULT: {
+    iconUrl: UrlMarker.DEFAULT,
+    iconSize: [27, 40],
+    iconAnchor: [13, 40],
+  },
+  CURRENT: {
+    iconUrl: UrlMarker.CURRENT,
+    iconSize: [27, 40],
+    iconAnchor: [13, 40],
+  }
+} as const;
+
+const TileLayer: TileLayerType = {
+  URL: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+} as const;
+
+export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer};

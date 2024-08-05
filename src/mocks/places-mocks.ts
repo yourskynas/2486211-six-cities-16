@@ -123,14 +123,14 @@ const placeOffers = [
     city: {
       name: 'Paris',
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        latitude: 48.85661,
+        longitude: 2.351499,
         zoom: 13
       }
     },
     location: {
-      latitude: 52.36854,
-      longitude: 4.887976,
+      latitude: 48.834610000000,
+      longitude: 2.3399,
       zoom: 16
     },
     isFavorite: true,

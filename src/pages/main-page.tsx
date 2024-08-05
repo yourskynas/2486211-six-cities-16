@@ -1,10 +1,10 @@
 import { CityName, PlaceOfferType } from '../types';
 import LocationsList from '../components/locations/locations-list';
-import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
 import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
+import CitiesMap from '../components/map/cities-map';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -29,6 +29,10 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
 
   const groupedOffersByCity = groupByCity[currentCity];
 
+  const getLocationCurrentCity = () => groupedOffersByCity && groupedOffersByCity[0].city.location;
+
+  const locationCurrentCity = getLocationCurrentCity();
+
   const classNameMainElement = groupedOffersByCity ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty';
 
   return (
@@ -52,7 +56,7 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
                     {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={onOfferHover}/>)}
                   </div>
                 </section>
-                <CitiesMap />
+                <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} />
               </div>
             ) : <EmptyMain city={currentCity} /> }
         </div>

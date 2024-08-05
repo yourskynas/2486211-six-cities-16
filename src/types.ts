@@ -47,4 +47,20 @@ export type User = {
   isPro: boolean;
 };
 
+export type MapIconType = {
+  iconUrl: string;
+  iconSize: [number, number];
+  iconAnchor: [number, number];
+}
+
+export type MapIconsType = {
+  DEFAULT: MapIconType;
+  CURRENT: MapIconType;
+};
+
+export type TileLayerType = {
+  URL: string;
+  ATTRIBUTION: string;
+}
+
 export type CityName = typeof CITIES[number];

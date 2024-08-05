@@ -14,10 +14,8 @@ const Logo = ({classNameLogo = 'header__logo', imageWidth = '81', imageHeight = 
     FOR_IMAGE_HEIGHT: imageHeight,
   };
 
-  const defaultCity = 'Paris';
-
   return (
-    <Link to={AppRoute.MAIN(defaultCity)} className={LogoStyle.FOR_LINK}>
+    <Link to={AppRoute.DEFAULT_MAIN} className={LogoStyle.FOR_LINK}>
       <img className={classNameLogo} src="img/logo.svg" alt="6 cities logo" width={LogoStyle.FOR_IMAGE_WIDTH} height={LogoStyle.FOR_IMAGE_HEIGHT}/>
     </Link>
   );
