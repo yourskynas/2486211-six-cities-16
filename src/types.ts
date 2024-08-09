@@ -48,14 +48,14 @@ export type User = {
 };
 
 export type MapIconType = {
-  iconUrl: string;
+  readonly iconUrl: string;
   readonly iconSize: [number, number];
   readonly iconAnchor: [number, number];
 }
 
 export type MapIconsType = {
-  DEFAULT: MapIconType;
-  CURRENT: MapIconType;
+  readonly DEFAULT: MapIconType;
+  readonly CURRENT: MapIconType;
 };
 
 export type TileLayerType = {
