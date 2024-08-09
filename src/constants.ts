@@ -1,4 +1,4 @@
-import { MapIconsType, TileLayerType } from './types';
+import { MapIconsReadonly, TileLayerType } from './types';
 
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -30,7 +30,7 @@ const UrlMarker = {
   CURRENT: 'img/pin-active.svg'
 } as const;
 
-const MapIcon: MapIconsType = {
+const MapIcon: MapIconsReadonly = {
   DEFAULT: {
     iconUrl: UrlMarker.DEFAULT,
     iconSize: [27, 40],

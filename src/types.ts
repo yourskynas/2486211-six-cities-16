@@ -58,6 +58,8 @@ export type MapIconsType = {
   readonly CURRENT: MapIconType;
 };
 
+export type MapIconsReadonly = Readonly<MapIconsType>;
+
 export type TileLayerType = {
   URL: string;
   ATTRIBUTION: string;
