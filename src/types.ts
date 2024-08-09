@@ -49,8 +49,8 @@ export type User = {
 
 export type MapIconType = {
   iconUrl: string;
-  iconSize: [number, number];
-  iconAnchor: [number, number];
+  readonly iconSize: [number, number];
+  readonly iconAnchor: [number, number];
 }
 
 export type MapIconsType = {

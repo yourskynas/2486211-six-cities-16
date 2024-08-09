@@ -23,12 +23,7 @@ type AppProps = {
 }
 
 const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
-  const [activeOffer, setActiveOffer] = useState('');
   const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
-
-  const handleArticleMouseEnter = (value: string) => {
-    setActiveOffer(value);
-  };
 
   const handleCityLinkClick = (value: string) => {
     setCurrentCity(value);
@@ -47,10 +42,8 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
                     cities={cities}
                     placesOptions={placesOptions}
                     placeOffers={placeOffers}
-                    onOfferHover={handleArticleMouseEnter}
                     onCityClick={handleCityLinkClick}
                     currentCity={currentCity}
-                    activeOffer={activeOffer}
                   />
                 }
               />
