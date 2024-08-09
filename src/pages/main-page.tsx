@@ -1,11 +1,11 @@
-import { PlaceOfferType } from '../types';
+import { CityName, PlaceOfferType } from '../types';
 import LocationsList from '../components/locations/locations-list';
-import CitiesMap from '../components/map/cities-map';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
 import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
-import { CITIES } from '../constants';
+import CitiesMap from '../components/map/cities-map';
+import { useState } from 'react';
 
 type PlaceOffersProps = PlaceOfferType[];
 
@@ -13,14 +13,16 @@ type MainProps = {
   cities: string[];
   placesOptions: string[];
   placeOffers: PlaceOffersProps;
-  onOfferHover: (value: string) => void;
   onCityClick: (value: string) => void;
-  currentCity: string;
+  currentCity: CityName;
 }
 
-type CityName = typeof CITIES[number];
+const MainPage = ({ cities, placesOptions, placeOffers, onCityClick, currentCity}: MainProps): JSX.Element => {
+  const [activeOffer, setActiveOffer] = useState('');
 
-const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClick, currentCity}: MainProps): JSX.Element => {
+  const handleArticleMouseEnter = (value: string) => {
+    setActiveOffer(value);
+  };
 
   const groupByCity = placeOffers.reduce((group: Record<CityName, PlaceOfferType[]>, offer: PlaceOfferType) => {
     const city = offer.city.name;
@@ -30,6 +32,10 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
   }, {});
 
   const groupedOffersByCity = groupByCity[currentCity];
+
+  const getLocationCurrentCity = () => groupedOffersByCity && groupedOffersByCity[0].city.location;
+
+  const locationCurrentCity = getLocationCurrentCity();
 
   const classNameMainElement = groupedOffersByCity ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty';
 
@@ -51,10 +57,10 @@ const MainPage = ({ cities, placesOptions, placeOffers, onOfferHover, onCityClic
                   <b className="places__found">{groupedOffersByCity.length} places to stay in {currentCity}</b>
                   <PlacesSorting placesOptions={placesOptions} />
                   <div className="cities__places-list places__list tabs__content">
-                    {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={onOfferHover}/>)}
+                    {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
                   </div>
                 </section>
-                <CitiesMap />
+                <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} />
               </div>
             ) : <EmptyMain city={currentCity} /> }
         </div>

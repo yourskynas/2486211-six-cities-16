@@ -1,4 +1,8 @@
+import { MapIconsReadonly, TileLayerType } from './types';
+
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+const DEFAULT_CITY = 'Paris';
 
 const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
@@ -8,10 +12,11 @@ const CommentLengthLimit = {
 } as const;
 
 const AppRoute = {
-  MAIN: (cityName: string) => `/city/:${cityName}`,
+  DEFAULT_MAIN: 'city/paris',
+  MAIN: (cityName: string) => `/city/${cityName.toLowerCase()}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: (id: string) => `/offer/:id${id}`,
+  OFFER: '/offer/:id',
 } as const;
 
 const AuthorizationStatus = {
@@ -20,4 +25,27 @@ const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 } as const;
 
-export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus };
+const UrlMarker = {
+  DEFAULT: 'img/pin.svg',
+  CURRENT: 'img/pin-active.svg'
+} as const;
+
+const MapIcon: MapIconsReadonly = {
+  DEFAULT: {
+    iconUrl: UrlMarker.DEFAULT,
+    iconSize: [27, 40],
+    iconAnchor: [13, 40],
+  },
+  CURRENT: {
+    iconUrl: UrlMarker.CURRENT,
+    iconSize: [27, 40],
+    iconAnchor: [13, 40],
+  }
+};
+
+const TileLayer: TileLayerType = {
+  URL: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+} as const;
+
+export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer};
