@@ -41,7 +41,7 @@ const MapIcon: MapIconsReadonly = {
     iconSize: [27, 40],
     iconAnchor: [13, 40],
   }
-} as const;
+};
 
 const TileLayer: TileLayerType = {
   URL: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
