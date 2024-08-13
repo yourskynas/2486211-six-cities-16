@@ -6,32 +6,24 @@ import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
 import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
-
-type PlaceOffersProps = PlaceOfferType[];
+import { useAppSelector } from '../components/hooks';
 
 type MainProps = {
   cities: string[];
   placesOptions: string[];
-  placeOffers: PlaceOffersProps;
-  onCityClick: (value: string) => void;
-  currentCity: CityName;
+  groupedOffersByCities: Record<CityName, PlaceOfferType[]>;
 }
 
-const MainPage = ({ cities, placesOptions, placeOffers, onCityClick, currentCity}: MainProps): JSX.Element => {
+const MainPage = ({ cities, placesOptions, groupedOffersByCities}: MainProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState('');
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
   };
 
-  const groupByCity = placeOffers.reduce((group: Record<CityName, PlaceOfferType[]>, offer: PlaceOfferType) => {
-    const city = offer.city.name;
-    group[city] = group[city] ?? [];
-    group[city].push(offer);
-    return group;
-  }, {});
+  const currentCity = useAppSelector((state) => state.city);
 
-  const groupedOffersByCity = groupByCity[currentCity];
+  const groupedOffersByCity = groupedOffersByCities[currentCity];
 
   const getLocationCurrentCity = () => groupedOffersByCity && groupedOffersByCity[0].city.location;
 
@@ -47,7 +39,7 @@ const MainPage = ({ cities, placesOptions, placeOffers, onCityClick, currentCity
 
       <main className={classNameMainElement}>
         <h1 className="visually-hidden">Cities</h1>
-        <LocationsList cities={cities} onCityClick={onCityClick} currentCity={currentCity}/>
+        <LocationsList cities={cities} currentCity={currentCity}/>
         <div className="cities">
           {groupedOffersByCity
             ? (

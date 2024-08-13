@@ -1,25 +1,27 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../constants';
+import { AppRoute, CITIES } from '../../constants';
+import { useAppDispatch } from '../hooks';
+import { changeCity } from '../../store/action';
+import { CityName } from '../../types';
 
 type LocationsProps = {
-  cities: string[];
-  onCityClick: (currentCity:string) => void;
+  cities: typeof CITIES;
   currentCity: string;
 }
 
 type LocationItemProps = {
-  city: string;
-  onCityClick: (currentCity:string) => void;
+  city: CityName;
   currentCity: string;
 }
 
-const LocationsItem = ({ city, onCityClick, currentCity }: LocationItemProps): JSX.Element => {
+const LocationsItem = ({ city, currentCity }: LocationItemProps): JSX.Element => {
+  const dispatch = useAppDispatch();
 
   const classCityItem = city === currentCity
     ? 'locations__item-link tabs__item tabs__item--active'
     : 'locations__item-link tabs__item';
   return (
-    <li onClick={() => onCityClick(city)} className="locations__item">
+    <li onClick={() => dispatch(changeCity(city))} className="locations__item">
       <Link className={classCityItem} to={AppRoute.MAIN(city.toLowerCase())}>
         <span>{city}</span>
       </Link>
@@ -27,11 +29,11 @@ const LocationsItem = ({ city, onCityClick, currentCity }: LocationItemProps): J
   );
 };
 
-const LocationsList = ({cities, onCityClick, currentCity}: LocationsProps): JSX.Element => (
+const LocationsList = ({cities, currentCity}: LocationsProps): JSX.Element => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {cities.map((city) => <LocationsItem key={city} city={city} onCityClick={onCityClick} currentCity={currentCity}/>)}
+        {cities.map((city) => <LocationsItem key={city} city={city} currentCity={currentCity}/>)}
       </ul>
     </section>
   </div>

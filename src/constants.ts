@@ -2,7 +2,7 @@ import { MapIconsReadonly, TileLayerType } from './types';
 
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-const DEFAULT_CITY = 'Paris';
+const DEFAULT_CITY = CITIES[0];
 
 const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
