@@ -1,33 +1,30 @@
-import { OfferType, PlaceOfferType, ReviewType } from '../../types';
+import { OfferType, ReviewType } from '../../types';
 import MainPage from '../../pages/main-page';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, CITIES, DEFAULT_CITY } from '../../constants';
+import { AppRoute, AuthorizationStatus, CITIES } from '../../constants';
 import LoginPage from '../../pages/login-page';
 import OfferPage from '../../pages/offer-page';
 import FavoritesPage from '../../pages/favorites-page';
 import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { useState } from 'react';
 import TemplatePage from '../../pages/template-page';
-
-type PlaceOffersProps = PlaceOfferType[];
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { getOffers } from '../../store/action';
+import { groupByCity } from '../../utils';
 
 type AppProps = {
   cities: string[];
   placesOptions: string[];
-  placeOffers: PlaceOffersProps;
   offer: OfferType;
   reviews: ReviewType[];
   authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
-  const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
-
-  const handleCityLinkClick = (value: string) => {
-    setCurrentCity(value);
-  };
+const App = ({cities, placesOptions, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  dispatch(getOffers());
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <HelmetProvider>
@@ -41,9 +38,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
                   <MainPage
                     cities={cities}
                     placesOptions={placesOptions}
-                    placeOffers={placeOffers}
-                    onCityClick={handleCityLinkClick}
-                    currentCity={currentCity}
+                    groupedOffersByCities={groupByCity(offers)}
                   />
                 }
               />
@@ -53,7 +48,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
               element={
                 <OfferPage
                   offer={offer}
-                  placeOffers={placeOffers}
+                  placeOffers={offers}
                   reviews={reviews}
                   authorizationStatus={authorizationStatus}
                 />
@@ -63,7 +58,7 @@ const App = ({cities, placesOptions, placeOffers, offer, reviews, authorizationS
               path={AppRoute.FAVORITES}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus} >
-                  <FavoritesPage placeOffers={placeOffers} />
+                  <FavoritesPage groupedOffersByCities={groupByCity(offers, true)} />
                 </PrivateRoute>
               }
             />

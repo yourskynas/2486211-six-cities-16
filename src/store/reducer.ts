@@ -20,7 +20,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = placeOffers;
     })
     .addCase(changeCity, (state, action) => {
-      state.city = action.payload.city;
+      state.city = action.payload;
     });
 });
 
