@@ -23,7 +23,6 @@ const groupByCity = (offers: PlaceOfferType[], isFavoritePage = false) => offers
   } else if (!isFavoritePage) {
     group[city].push(offer);
   }
-  // group[city].push(offer);
   return group;
 }, {});
 
