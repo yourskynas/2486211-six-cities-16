@@ -15,13 +15,12 @@ import { groupByCity } from '../../utils';
 
 type AppProps = {
   cities: string[];
-  placesOptions: string[];
   offer: OfferType;
   reviews: ReviewType[];
   authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const App = ({cities, placesOptions, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
+const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
   const dispatch = useAppDispatch();
   dispatch(getOffers());
   const offers = useAppSelector((state) => state.offers);
@@ -37,7 +36,6 @@ const App = ({cities, placesOptions, offer, reviews, authorizationStatus}: AppPr
                 key={city} element={
                   <MainPage
                     cities={cities}
-                    placesOptions={placesOptions}
                     groupedOffersByCities={groupByCity(offers)}
                   />
                 }
