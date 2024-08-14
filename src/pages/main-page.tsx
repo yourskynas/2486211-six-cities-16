@@ -7,23 +7,26 @@ import EmptyMain from '../components/empty-stubs/empty-main';
 import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
+import { sortingPlaces } from '../utils';
 
 type MainProps = {
   cities: string[];
-  placesOptions: string[];
   groupedOffersByCities: Record<CityName, PlaceOfferType[]>;
 }
 
-const MainPage = ({ cities, placesOptions, groupedOffersByCities}: MainProps): JSX.Element => {
+const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState('');
+
+  const sortingStatus = useAppSelector((state) => state.sorting);
+  const currentCity = useAppSelector((state) => state.city);
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
   };
 
-  const currentCity = useAppSelector((state) => state.city);
+  const sortOffers = (offers: PlaceOfferType[]): PlaceOfferType[] => sortingPlaces[sortingStatus](offers);
 
-  const groupedOffersByCity = groupedOffersByCities[currentCity];
+  const groupedOffersByCity = sortOffers(groupedOffersByCities[currentCity]);
 
   const getLocationCurrentCity = () => groupedOffersByCity && groupedOffersByCity[0].city.location;
 
@@ -47,7 +50,7 @@ const MainPage = ({ cities, placesOptions, groupedOffersByCities}: MainProps): J
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{groupedOffersByCity.length} places to stay in {currentCity}</b>
-                  <PlacesSorting placesOptions={placesOptions} />
+                  <PlacesSorting />
                   <div className="cities__places-list places__list tabs__content">
                     {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
                   </div>

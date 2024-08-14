@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus, CITIES, PLACES_OPTIONS } from './constants';
+import { AuthorizationStatus, CITIES } from './constants';
 import { offer } from './mocks/offer-mocks';
 import { reviews } from './mocks/reviews-mocks';
 import { Provider } from 'react-redux';
@@ -16,7 +16,6 @@ root.render(
     <Provider store={store}>
       <App
         cities = {CITIES}
-        placesOptions = {PLACES_OPTIONS}
         offer = {offer}
         reviews={reviews}
         authorizationStatus={AuthorizationStatus.AUTH}
