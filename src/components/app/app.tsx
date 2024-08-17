@@ -12,6 +12,7 @@ import TemplatePage from '../../pages/template-page';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { getOffers } from '../../store/action';
 import { groupByCity } from '../../utils';
+import { selectOffers } from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
@@ -23,7 +24,7 @@ type AppProps = {
 const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
   const dispatch = useAppDispatch();
   dispatch(getOffers());
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(selectOffers);
 
   return (
     <HelmetProvider>

@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { PlacesOption } from '../../constants';
 import { getSortingStatus } from '../../store/action';
-import { OptionsType } from '../../types';
+import { PlacesOptionKey } from '../../types';
+import { selectSortingStatus } from '../../store/selectors';
 
 type OptionProps = {
-  option: OptionsType;
-  onClick: (option: OptionsType) => void;
-  sortingStatus: OptionsType | undefined;
+  option: PlacesOptionKey;
+  onClick: (option: PlacesOptionKey) => void;
+  sortingStatus: PlacesOptionKey;
 }
 
 const PlacesOptions = ({option, onClick, sortingStatus}: OptionProps): JSX.Element => {
@@ -22,10 +23,10 @@ const PlacesOptions = ({option, onClick, sortingStatus}: OptionProps): JSX.Eleme
 
 const PlacesSorting = (): JSX.Element => {
   const [isSortingHide, setSortingPopup] = useState<boolean>(false);
-  const sortingStatus = useAppSelector((state) => state.sorting);
+  const sortingStatus = useAppSelector(selectSortingStatus);
   const dispatch = useAppDispatch();
 
-  const handleOptionClick = (option: OptionsType) => {
+  const handleOptionClick = (option: PlacesOptionKey) => {
     dispatch(getSortingStatus(option));
     setSortingPopup(!isSortingHide);
   };

@@ -2,12 +2,12 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, getOffers, getSortingStatus } from './action';
 import { placeOffers } from '../mocks/places-mocks';
 import { DEFAULT_CITY, PlacesOption } from '../constants';
-import { CityName, OptionsType, PlaceOfferType } from '../types';
+import { CityName, PlaceOfferType, PlacesOptionKey } from '../types';
 
 type InitialState = {
   city: CityName;
   offers: PlaceOfferType[];
-  sorting: OptionsType | undefined;
+  sorting: PlacesOptionKey;
 }
 
 const initialState: InitialState = {

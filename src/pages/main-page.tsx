@@ -8,6 +8,7 @@ import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
 import { sortingPlaces } from '../utils';
+import { selectCity, selectSortingStatus } from '../store/selectors';
 
 type MainProps = {
   cities: string[];
@@ -17,14 +18,14 @@ type MainProps = {
 const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState('');
 
-  const sortingStatus = useAppSelector((state) => state.sorting);
-  const currentCity = useAppSelector((state) => state.city);
+  const sortingStatus = useAppSelector(selectSortingStatus);
+  const currentCity = useAppSelector(selectCity);
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
   };
 
-  const sortOffers = (offers: PlaceOfferType[]): PlaceOfferType[] => sortingPlaces[sortingStatus](offers);
+  const sortOffers = (offers: PlaceOfferType[]): PlaceOfferType[] => sortingStatus && sortingPlaces[sortingStatus](offers);
 
   const groupedOffersByCity = sortOffers(groupedOffersByCities[currentCity]);
 

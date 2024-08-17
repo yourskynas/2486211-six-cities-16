@@ -1,4 +1,4 @@
-import { CITIES } from './constants';
+import { CITIES, PlacesOption } from './constants';
 
 export type LocationType = {
   latitude: number;
@@ -65,6 +65,6 @@ export type TileLayerType = {
   ATTRIBUTION: string;
 }
 
-export type OptionsType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
+export type PlacesOptionKey = typeof PlacesOption[keyof typeof PlacesOption];
 
 export type CityName = typeof CITIES[number];
