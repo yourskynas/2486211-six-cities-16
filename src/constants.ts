@@ -4,7 +4,12 @@ const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseld
 
 const DEFAULT_CITY = CITIES[0];
 
-const PLACES_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+const PlacesOption = {
+  POPULAR: 'Popular',
+  PRICE_INCREASE: 'Price: low to high',
+  PRICE_REDUCTION: 'Price: high to low',
+  TOP_RATED: 'Top rated first',
+} as const;
 
 const CommentLengthLimit = {
   MIN: 50,
@@ -48,4 +53,4 @@ const TileLayer: TileLayerType = {
   ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 } as const;
 
-export { CITIES, PLACES_OPTIONS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer};
+export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption};

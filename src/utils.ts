@@ -1,4 +1,5 @@
-import { CityName, PlaceOfferType } from './types';
+import { PlacesOption } from './constants';
+import { CityName, PlaceOfferType, PlacesOptionKey } from './types';
 
 const ratingInProcent = (rating: number): string => {
   const procent = 100;
@@ -26,4 +27,11 @@ const groupByCity = (offers: PlaceOfferType[], isFavoritePage = false) => offers
   return group;
 }, {});
 
-export { ratingInProcent, humanizingDate, groupByCity };
+const sortingPlaces: Record<PlacesOptionKey, (offers: PlaceOfferType[]) => PlaceOfferType[]> = {
+  [PlacesOption.POPULAR]: (offers: PlaceOfferType[]) => offers,
+  [PlacesOption.PRICE_INCREASE]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerA.price - offerB.price),
+  [PlacesOption.PRICE_REDUCTION]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.price - offerA.price),
+  [PlacesOption.TOP_RATED]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.rating - offerA.rating),
+};
+
+export { ratingInProcent, humanizingDate, groupByCity, sortingPlaces };

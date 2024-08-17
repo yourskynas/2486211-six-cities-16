@@ -6,12 +6,12 @@ import { CityName } from '../../types';
 
 type LocationsProps = {
   cities: typeof CITIES;
-  currentCity: string;
+  currentCity: CityName;
 }
 
 type LocationItemProps = {
   city: CityName;
-  currentCity: string;
+  currentCity: CityName;
 }
 
 const LocationsItem = ({ city, currentCity }: LocationItemProps): JSX.Element => {
