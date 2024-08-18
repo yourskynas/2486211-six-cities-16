@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOffers, getSortingStatus, loadOffers, setOffersDataLoadingStatus } from './action';
+import { changeCity, getOffers, getSortingStatus, loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
 import { placeOffers } from '../mocks/places-mocks';
-import { DEFAULT_CITY, PlacesOption } from '../constants';
+import { AuthorizationStatus, DEFAULT_CITY, PlacesOption } from '../constants';
 import { CityName, PlaceOfferType, PlacesOptionKey } from '../types';
 
 type InitialState = {
@@ -9,6 +9,7 @@ type InitialState = {
   offers: PlaceOfferType[];
   sorting: PlacesOptionKey;
   isOffersDataLoading: boolean;
+  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
 const initialState: InitialState = {
@@ -16,6 +17,7 @@ const initialState: InitialState = {
   offers: [],
   sorting: PlacesOption.POPULAR,
   isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -34,6 +36,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
