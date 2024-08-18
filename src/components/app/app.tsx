@@ -11,7 +11,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
 import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectIsOffersDataLoading, selectOffers } from '../../store/selectors';
+import { selectError, selectFavoritesOffers, selectIsOffersDataLoading, selectOffers } from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
@@ -22,19 +22,15 @@ type AppProps = {
 
 const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
   const offers = useAppSelector(selectOffers);
+  const favoritesOffers = useAppSelector(selectFavoritesOffers);
   const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
-
-  if (isOffersDataLoading) {
-    return (
-      <NotFoundPage />
-    );
-  }
+  const error = useAppSelector(selectError);
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<TemplatePage authorizationStatus={authorizationStatus} />}>
+          <Route element={<TemplatePage authorizationStatus={authorizationStatus} favoritesOffersCount={favoritesOffers.length} />}>
             <Route index element={<Navigate to={AppRoute.DEFAULT_MAIN} />} />
             {CITIES.map((city) => (
               <Route path={`city/${city.toLowerCase()}`}
@@ -61,7 +57,7 @@ const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Eleme
               path={AppRoute.FAVORITES}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus} >
-                  <FavoritesPage groupedOffersByCities={groupByCity(offers, true)} />
+                  <FavoritesPage favoritesOffers={favoritesOffers} />
                 </PrivateRoute>
               }
             />

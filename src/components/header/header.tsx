@@ -4,16 +4,21 @@ import Logo from '../logo/logo';
 
 type HeaderProps = {
   authorizationStatus?: keyof typeof AuthorizationStatus;
+  favoritesOffersCount?: number;
 }
 
-const NavigateForUser = (): JSX.Element => (
+type NavigateForUserProps = {
+  favoritesOffersCount?: number;
+}
+
+const NavigateForUser = ({favoritesOffersCount}: NavigateForUserProps): JSX.Element => (
   <>
     <li className="header__nav-item user">
       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
         <div className="header__avatar-wrapper user__avatar-wrapper">
         </div>
         <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-        <span className="header__favorite-count">3</span>
+        <span className="header__favorite-count">{favoritesOffersCount}</span>
       </Link>
     </li>
     <li className="header__nav-item">
@@ -34,7 +39,7 @@ const NavigateForLogin = (): JSX.Element => (
   </li>
 );
 
-const Header = ({authorizationStatus}: HeaderProps): JSX.Element => (
+const Header = ({authorizationStatus, favoritesOffersCount}: HeaderProps): JSX.Element => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -43,7 +48,7 @@ const Header = ({authorizationStatus}: HeaderProps): JSX.Element => (
         </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
-            {authorizationStatus === AuthorizationStatus.AUTH ? <NavigateForUser /> : <NavigateForLogin />}
+            {authorizationStatus === AuthorizationStatus.AUTH ? <NavigateForUser favoritesOffersCount={favoritesOffersCount} /> : <NavigateForLogin />}
           </ul>
         </nav>
       </div>

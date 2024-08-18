@@ -3,8 +3,11 @@ import Logo from '../components/logo/logo';
 import { CityName, PlaceOfferType } from '../types';
 import PlaceCard from '../components/place-card/place-card';
 import { Helmet } from 'react-helmet-async';
+import { groupByCity } from '../utils';
+import EmptyFavorites from '../components/empty-stubs/empty-favorites';
 
 type FavoritesProps = {
+  favoritesOffers: PlaceOfferType[];
   groupedOffersByCities: Record<CityName, PlaceOfferType[]>;
 }
 
@@ -28,30 +31,35 @@ const FavoriteItem = ({city, offers}: FavoriteItemProps): JSX.Element => (
   </li>
 );
 
-const FavoriteList = ({groupedOffersByCities}: FavoritesProps): JSX.Element => (
+const FavoriteList = ({groupedOffersByCities}: Omit<FavoritesProps, 'favoritesOffers'>): JSX.Element => (
   <ul className="favorites__list">
     {Object.entries(groupedOffersByCities).map(([city, groupedOffersByCity]) => <FavoriteItem key={nanoid()} city={city} offers={groupedOffersByCity} />)}
   </ul>
 );
 
-const FavoritesPage = ({groupedOffersByCities}: FavoritesProps): JSX.Element => (
-  <>
-    <Helmet>
-      <title>6 cities | Favorites</title>
-    </Helmet>
+const FavoritesPage = ({favoritesOffers}: Omit<FavoritesProps, 'groupedOffersByCities'>): JSX.Element => {
+  const groupedOffersByCities = groupByCity(favoritesOffers);
+  return (
+    <>
+      <Helmet>
+        <title>6 cities | Favorites</title>
+      </Helmet>
+      {favoritesOffers.length > 0 ? (
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <FavoriteList groupedOffersByCities={groupedOffersByCities} />
+            </section>
+          </div>
+        </main>
+      ) : <EmptyFavorites /> }
 
-    <main className="page__main page__main--favorites">
-      <div className="page__favorites-container container">
-        <section className="favorites">
-          <h1 className="favorites__title">Saved listing</h1>
-          <FavoriteList groupedOffersByCities={groupedOffersByCities} />
-        </section>
-      </div>
-    </main>
-    <footer className="footer container">
-      <Logo classNameLogo='footer__logo' imageWidth='64' imageHeight='33' />
-    </footer>
-  </>
-);
+      <footer className="footer container">
+        <Logo classNameLogo='footer__logo' imageWidth='64' imageHeight='33' />
+      </footer>
+    </>
+  );
+};
 
 export default FavoritesPage;
