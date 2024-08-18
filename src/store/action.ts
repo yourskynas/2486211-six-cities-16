@@ -10,6 +10,8 @@ export const getSortingStatus = createAction<PlacesOptionKey>('sorting/getSortin
 
 export const loadOffers = createAction<PlaceOfferType[]>('data/loadOffers');
 
+export const loadFavoritesOffers = createAction<PlaceOfferType[]>('data/loadFavoritesOffers');
+
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
 export const requireAuthorization = createAction<keyof typeof AuthorizationStatus>('user/requireAuthorization');
