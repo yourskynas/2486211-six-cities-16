@@ -15,3 +15,5 @@ export const loadFavoritesOffers = createAction<PlaceOfferType[]>('data/loadFavo
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
 export const requireAuthorization = createAction<keyof typeof AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string | null>('data/setError');

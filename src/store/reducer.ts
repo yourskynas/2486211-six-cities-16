@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOffers, getSortingStatus, loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
+import { changeCity, getOffers, getSortingStatus, loadFavoritesOffers, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
 import { placeOffers } from '../mocks/places-mocks';
 import { AuthorizationStatus, DEFAULT_CITY, PlacesOption } from '../constants';
 import { CityName, PlaceOfferType, PlacesOptionKey } from '../types';
@@ -10,6 +10,8 @@ type InitialState = {
   sorting: PlacesOptionKey;
   isOffersDataLoading: boolean;
   authorizationStatus: keyof typeof AuthorizationStatus;
+  error: string | null;
+  favoritesOffers: PlaceOfferType[];
 }
 
 const initialState: InitialState = {
@@ -18,6 +20,8 @@ const initialState: InitialState = {
   sorting: PlacesOption.POPULAR,
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  error: null,
+  favoritesOffers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -39,6 +43,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(loadFavoritesOffers, (state, action) => {
+      state.favoritesOffers = action.payload;
     });
 });
 
