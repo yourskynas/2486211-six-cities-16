@@ -9,10 +9,9 @@ import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { getOffers } from '../../store/action';
+import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectOffers } from '../../store/selectors';
+import { selectIsOffersDataLoading, selectOffers } from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
@@ -22,9 +21,14 @@ type AppProps = {
 }
 
 const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  dispatch(getOffers());
   const offers = useAppSelector(selectOffers);
+  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return (
+      <NotFoundPage />
+    );
+  }
 
   return (
     <HelmetProvider>

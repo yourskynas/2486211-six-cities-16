@@ -8,3 +8,5 @@ export const getOffers = createAction('offers/getOffers');
 export const getSortingStatus = createAction<PlacesOptionKey>('sorting/getSortingStatus');
 
 export const loadOffers = createAction<PlaceOfferType[]>('data/loadOffers');
+
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
