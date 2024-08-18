@@ -53,4 +53,11 @@ const TileLayer: TileLayerType = {
   ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 } as const;
 
-export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption};
+const APIRoute = {
+  OFFERS: '/offers',
+  FAVORITE: '/favorite',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+} as const;
+
+export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute};
