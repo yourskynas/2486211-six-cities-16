@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOffers, getSortingStatus } from './action';
+import { changeCity, getOffers, getSortingStatus, loadOffers } from './action';
 import { placeOffers } from '../mocks/places-mocks';
 import { DEFAULT_CITY, PlacesOption } from '../constants';
 import { CityName, PlaceOfferType, PlacesOptionKey } from '../types';
@@ -26,6 +26,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getSortingStatus, (state, action) => {
       state.sorting = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     });
 });
 
