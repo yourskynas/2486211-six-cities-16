@@ -3,10 +3,23 @@ import { AppDispatch, State } from './types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute, AuthorizationStatus } from '../constants';
 import { PlaceOfferType } from '../types';
-import { loadFavoritesOffers, loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
+import { loadFavoritesOffers, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from './types/auth-data';
 import { UserData } from './types/user-data';
+import { store } from '.';
+
+const TIMEOUT_SHOW_ERROR = 2000;
+
+export const clearErrorAction = createAsyncThunk(
+  'data/clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError(null)),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
