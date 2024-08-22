@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../components/logo/logo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../constants';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../components/hooks';
@@ -11,6 +11,7 @@ const LoginPage = (): JSX.Element => {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -51,7 +52,7 @@ const LoginPage = (): JSX.Element => {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" ref={passwordRef} required/>
               </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={() => navigate(-1)}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
