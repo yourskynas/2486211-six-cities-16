@@ -1,12 +1,12 @@
-const RATINGS = ['5', '4', '3', '2', '1'] as const;
+const RATINGS = [5 , 4 , 3 , 2 , 1] as const;
 
 type RatingItemProps = {
-  rating: '5' | '4' | '3' | '2' | '1';
+  rating: 5 | 4 | 3 | 2 | 1;
 } & RatingProps;
 
 type RatingProps = {
-  onRatingClick: (value: string) => void;
-  valueRating: string;
+  onRatingClick: (value: number) => void;
+  valueRating: number;
 }
 
 const OfferRatingItem = ({rating, onRatingClick, valueRating}: RatingItemProps): JSX.Element => (

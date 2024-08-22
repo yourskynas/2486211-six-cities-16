@@ -6,6 +6,12 @@ export const selectCity = (state: Selector) => state.city;
 
 export const selectOffers = (state: Selector) => state.offers;
 
+export const selectCurrentOffer = (state: Selector) => state.currentOffer;
+
+export const selectComments = (state: Selector) => state.comments;
+
+export const selectNearbyOffers = (state: Selector) => state.nearbyOffers;
+
 export const selectFavoritesOffers = (state: Selector) => state.favoritesOffers;
 
 export const selectIsOffersDataLoading = (state: Selector) => state.isOffersDataLoading;
