@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../components/hooks';
 import { useSelector } from 'react-redux';
 import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectNearbyOffers } from '../store/selectors';
 import NotFoundPage from './not-found-page';
+import CitiesMap from '../components/map/cities-map';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();
@@ -35,6 +36,7 @@ const OfferPage = (): JSX.Element => {
   const currentOffer = useSelector(selectCurrentOffer);
   const reviews = useSelector(selectComments);
   const nearbyOffers = useSelector(selectNearbyOffers);
+  const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, 3);
 
   return (currentOffer !== null) ?
     <>
@@ -99,10 +101,10 @@ const OfferPage = (): JSX.Element => {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <CitiesMap locationCity={currentOffer.city.location} offers={slicedNearbyOffers} classNameMap={'offer'} />
         </section>
         <div className="container">
-          {nearbyOffers && <NearPlaces placeOffers={nearbyOffers} />}
+          {slicedNearbyOffers && <NearPlaces placeOffers={slicedNearbyOffers} />}
         </div>
       </main>
     </>

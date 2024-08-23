@@ -7,14 +7,15 @@ import { MapIcon } from '../../constants';
 
 type MapProps = {
   locationCity: LocationType;
-  offers: PlaceOfferType[];
-  activeOffer: string | undefined;
+  offers: PlaceOfferType[] | null;
+  activeOffer?: string | undefined;
+  classNameMap: string;
 }
 const defaultCustomIcon = new Icon(MapIcon.DEFAULT);
 
 const currentCustomIcon = new Icon(MapIcon.CURRENT);
 
-const CitiesMap = ({locationCity, offers, activeOffer}: MapProps): JSX.Element => {
+const CitiesMap = ({locationCity, offers, activeOffer, classNameMap}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, locationCity);
 
@@ -29,7 +30,7 @@ const CitiesMap = ({locationCity, offers, activeOffer}: MapProps): JSX.Element =
   }, [locationCity, map]);
 
   useEffect(() => {
-    if (map) {
+    if (map && offers) {
       offers.forEach((offer) => {
         leaflet.marker({
           lat: offer.location.latitude,
@@ -43,7 +44,7 @@ const CitiesMap = ({locationCity, offers, activeOffer}: MapProps): JSX.Element =
   }, [map, offers, activeOffer]);
 
   return (
-    <section className="cities__map map" ref={mapRef} />
+    <section className={`${classNameMap}__map map`} ref={mapRef} />
   );
 };
 
