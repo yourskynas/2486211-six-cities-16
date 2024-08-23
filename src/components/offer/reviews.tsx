@@ -43,7 +43,7 @@ const ReviewItem = ({review}: ReviewItem): JSX.Element => {
 
 const Reviews = ({reviews}: ReviewsProps): JSX.Element => {
   useEffect (() => {
-    // страница ломается, что не так с кодом..
+    // страница ломается, что не так с кодом...
     // if (reviews.length > 2) {
     //   reviews.sort((reviewA, reviewB) => new Date(reviewB.date).valueOf() - new Date(reviewA.date).valueOf());
     // }
