@@ -19,3 +19,5 @@ export const selectIsOffersDataLoading = (state: Selector) => state.isOffersData
 export const selectError = (state: Selector) => state.error;
 
 export const selectAuthorizationStatus = (state: Selector) => state.authorizationStatus;
+
+export const selectUserName = (state: Selector) => state.userName;

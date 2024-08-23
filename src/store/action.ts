@@ -20,4 +20,6 @@ export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersD
 
 export const requireAuthorization = createAction<keyof typeof AuthorizationStatus>('user/requireAuthorization');
 
+export const saveUserName = createAction<string>('user/saveUserName');
+
 export const setError = createAction<string | null>('data/setError');
