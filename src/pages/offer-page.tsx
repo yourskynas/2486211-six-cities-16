@@ -37,6 +37,7 @@ const OfferPage = (): JSX.Element => {
   const reviews = useSelector(selectComments);
   const nearbyOffers = useSelector(selectNearbyOffers);
   const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, 3);
+  const offersForMap = currentOffer && slicedNearbyOffers?.concat(currentOffer);
 
   return (currentOffer !== null) ?
     <>
@@ -101,7 +102,7 @@ const OfferPage = (): JSX.Element => {
               </section>
             </div>
           </div>
-          <CitiesMap locationCity={currentOffer.city.location} offers={slicedNearbyOffers} classNameMap={'offer'} />
+          <CitiesMap locationCity={currentOffer.city.location} offers={offersForMap} activeOffer={offerId} classNameMap={'offer'} />
         </section>
         <div className="container">
           {slicedNearbyOffers && <NearPlaces placeOffers={slicedNearbyOffers} />}
