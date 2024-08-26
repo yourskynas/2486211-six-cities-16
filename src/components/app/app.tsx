@@ -10,7 +10,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
 import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectAuthorizationStatus, selectFavoritesOffers, selectIsOffersDataLoading, selectOffers } from '../../store/selectors';
+import { selectAuthorizationStatus, selectFavoritesOffers, selectOffers } from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
@@ -19,7 +19,7 @@ type AppProps = {
 const App = ({cities}: AppProps): JSX.Element => {
   const offers = useAppSelector(selectOffers);
   const favoritesOffers = useAppSelector(selectFavoritesOffers);
-  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  // const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   // почему-то тоже падает
