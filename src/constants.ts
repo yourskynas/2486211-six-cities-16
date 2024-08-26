@@ -17,7 +17,7 @@ const CommentLengthLimit = {
 } as const;
 
 const AppRoute = {
-  DEFAULT_MAIN: 'city/paris',
+  DEFAULT_MAIN: '/city/paris',
   MAIN: (cityName: string) => `/city/${cityName.toLowerCase()}`,
   LOGIN: '/login',
   FAVORITES: '/favorites',
@@ -61,4 +61,10 @@ const APIRoute = {
   COMMENTS: '/comments',
 } as const;
 
-export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute};
+const TextErrorValidation = {
+  NO_LETTER: 'Введите хотя бы одну букву',
+  NO_NUMBER: 'Введите хотя бы одну цифру',
+  NO_SPACE: 'Не должно быть пробелов'
+} as const;
+
+export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation};
