@@ -58,6 +58,7 @@ const APIRoute = {
   FAVORITE: '/favorite',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  COMMENTS: '/comments',
 } as const;
 
 export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute};

@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { AuthorizationStatus, CITIES } from './constants';
-import { offer } from './mocks/offer-mocks';
-import { reviews } from './mocks/reviews-mocks';
+import { CITIES } from './constants';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchOffersAction } from './store/api-actions';
+import { checkAuthAction, fetchFavoritesOffersAction, fetchOffersAction } from './store/api-actions';
+// import Error from './components/empty-stubs/error';
 
 store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction())
+  .then((response) => {
+    if (response.meta.requestStatus === 'fulfilled') {
+      store.dispatch(fetchFavoritesOffersAction());
+    }
+  });
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,11 +22,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* всё падает, если раскомментировать <Error /> */}
       <App
         cities = {CITIES}
-        offer = {offer}
-        reviews={reviews}
-        authorizationStatus={AuthorizationStatus.AUTH}
       />
     </Provider>
   </React.StrictMode>

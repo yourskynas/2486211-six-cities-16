@@ -1,30 +1,63 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { CommentLengthLimit } from '../../constants';
 import OfferRating from './offer-rating';
+import { sendComment } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectIsOffersDataLoading } from '../../store/selectors';
+
+type ReviewFormProps = {
+  offerId: string;
+}
 
 type Submit = {
   disabledStatus: boolean;
 }
 
-const Submit = ({disabledStatus}: Submit): JSX.Element => (
-  <button className="reviews__submit form__submit button" type="submit" disabled={!disabledStatus}>Submit</button>
-);
+const Submit = ({disabledStatus}: Submit): JSX.Element => {
+  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  return (
+    <button className="reviews__submit form__submit button" type="submit" disabled={!disabledStatus || isOffersDataLoading}>Submit</button>
+  );
+};
 
-const ReviewForm = (): JSX.Element => {
+const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
   const [valueTextarea, setTextarea] = useState('');
-  const [valueRating, setRating] = useState('');
+  const [valueRating, setRating] = useState(0);
 
-  const onRatingClick = (value: string) => {
+  const dispatch = useAppDispatch();
+
+  const validTextarea = valueTextarea.length > CommentLengthLimit.MIN && valueTextarea.length < CommentLengthLimit.MAX;
+  const validRating = valueRating !== 0;
+  const disabledStatus = validTextarea && validRating;
+
+  const onRatingClick = (value: number) => {
     setRating(value);
   };
 
-  const validTextarea = valueTextarea.length > CommentLengthLimit.MIN && valueTextarea.length < CommentLengthLimit.MAX;
-  const validRating = valueRating !== '';
+  const clearForm = () => {
+    setTextarea('');
+    setRating(0);
+  };
 
-  const disabledStatus = validTextarea && validRating;
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (validTextarea && validRating) {
+      dispatch(sendComment({
+        id: offerId,
+        comment: valueTextarea,
+        rating: valueRating
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            clearForm();
+          }
+        });
+    }
+  };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => evt.preventDefault()}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <OfferRating onRatingClick={onRatingClick} valueRating={valueRating} />

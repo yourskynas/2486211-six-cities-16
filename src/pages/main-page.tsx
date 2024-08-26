@@ -56,7 +56,7 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
                     {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
                   </div>
                 </section>
-                <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} />
+                <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} classNameMap={'cities'} />
               </div>
             ) : <EmptyMain city={currentCity} /> }
         </div>

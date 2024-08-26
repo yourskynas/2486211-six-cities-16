@@ -1,7 +1,6 @@
-import { OfferType, ReviewType } from '../../types';
 import MainPage from '../../pages/main-page';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, CITIES } from '../../constants';
+import { AppRoute, CITIES } from '../../constants';
 import LoginPage from '../../pages/login-page';
 import OfferPage from '../../pages/offer-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -11,30 +10,30 @@ import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
 import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectIsOffersDataLoading, selectOffers } from '../../store/selectors';
+import { selectAuthorizationStatus, selectFavoritesOffers, selectOffers } from '../../store/selectors';
 
 type AppProps = {
   cities: string[];
-  offer: OfferType;
-  reviews: ReviewType[];
-  authorizationStatus: keyof typeof AuthorizationStatus;
 }
 
-const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Element => {
+const App = ({cities}: AppProps): JSX.Element => {
   const offers = useAppSelector(selectOffers);
-  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  const favoritesOffers = useAppSelector(selectFavoritesOffers);
+  // const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  if (isOffersDataLoading) {
-    return (
-      <NotFoundPage />
-    );
-  }
+  // почему-то тоже падает
+  // if (isOffersDataLoading) {
+  //   return (
+  //     <NotFoundPage />
+  //   );
+  // }
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<TemplatePage authorizationStatus={authorizationStatus} />}>
+          <Route element={<TemplatePage authorizationStatus={authorizationStatus} favoritesOffersCount={favoritesOffers.length} />}>
             <Route index element={<Navigate to={AppRoute.DEFAULT_MAIN} />} />
             {CITIES.map((city) => (
               <Route path={`city/${city.toLowerCase()}`}
@@ -49,19 +48,14 @@ const App = ({cities, offer, reviews, authorizationStatus}: AppProps): JSX.Eleme
             <Route
               path={AppRoute.OFFER}
               element={
-                <OfferPage
-                  offer={offer}
-                  placeOffers={offers}
-                  reviews={reviews}
-                  authorizationStatus={authorizationStatus}
-                />
+                <OfferPage />
               }
             />
             <Route
               path={AppRoute.FAVORITES}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus} >
-                  <FavoritesPage groupedOffersByCities={groupByCity(offers, true)} />
+                  <FavoritesPage favoritesOffers={favoritesOffers} />
                 </PrivateRoute>
               }
             />
