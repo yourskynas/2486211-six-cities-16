@@ -1,6 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 import { CityName, OfferType, PlaceOfferType, PlacesOptionKey, ReviewType } from '../types';
-import { AuthorizationStatus } from '../constants';
 
 export const changeCity = createAction<CityName>('city/changeCity');
 
@@ -17,8 +16,6 @@ export const loadNearbyOffers = createAction<PlaceOfferType[]>('data/loadNearbyO
 export const loadFavoritesOffers = createAction<PlaceOfferType[]>('data/loadFavoritesOffers');
 
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
-
-export const requireAuthorization = createAction<keyof typeof AuthorizationStatus>('user/requireAuthorization');
 
 export const saveUserName = createAction<string>('user/saveUserName');
 
