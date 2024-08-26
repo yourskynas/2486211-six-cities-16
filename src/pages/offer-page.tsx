@@ -12,15 +12,16 @@ import { useParams } from 'react-router-dom';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../components/hooks';
 import { useSelector } from 'react-redux';
-import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectNearbyOffers } from '../store/selectors';
-import NotFoundPage from './not-found-page';
+import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectError, selectNearbyOffers } from '../store/selectors';
 import CitiesMap from '../components/map/cities-map';
+import Error from '../components/empty-stubs/error';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();
   const offerId = params.id || '';
 
   const dispatch = useAppDispatch();
+  const error = useAppSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId))
@@ -39,7 +40,7 @@ const OfferPage = (): JSX.Element => {
   const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, 3);
   const offersForMap = currentOffer && slicedNearbyOffers?.concat(currentOffer);
 
-  return (currentOffer !== null) ?
+  return (currentOffer !== null && error === null) ?
     <>
       <Helmet>
         <title>6 cities | Offer </title>
@@ -109,7 +110,7 @@ const OfferPage = (): JSX.Element => {
         </div>
       </main>
     </>
-    : <NotFoundPage /> ;
+    : <Error /> ;
 };
 
 export default OfferPage;

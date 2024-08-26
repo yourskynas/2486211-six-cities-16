@@ -5,7 +5,6 @@ import { CITIES } from './constants';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { checkAuthAction, fetchFavoritesOffersAction, fetchOffersAction } from './store/api-actions';
-// import Error from './components/empty-stubs/error';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction())
@@ -22,7 +21,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* всё падает, если раскомментировать <Error /> */}
       <App
         cities = {CITIES}
       />

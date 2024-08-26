@@ -19,15 +19,7 @@ type AppProps = {
 const App = ({cities}: AppProps): JSX.Element => {
   const offers = useAppSelector(selectOffers);
   const favoritesOffers = useAppSelector(selectFavoritesOffers);
-  // const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-
-  // почему-то тоже падает
-  // if (isOffersDataLoading) {
-  //   return (
-  //     <NotFoundPage />
-  //   );
-  // }
 
   return (
     <HelmetProvider>
