@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectError, selectNearbyOffers } from '../store/selectors';
 import CitiesMap from '../components/map/cities-map';
 import Error from '../components/empty-stubs/error';
+import FavoriteIcon from '../components/favorite-icon/favorite-icon';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();
@@ -63,12 +64,7 @@ const OfferPage = (): JSX.Element => {
                 <h1 className="offer__name">
                   {currentOffer.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteIcon nameIcon='offer' widthIcon='31' heightIcon='33' />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
