@@ -2,6 +2,7 @@ import { generatePath, Link } from 'react-router-dom';
 import { PlaceOfferType } from '../../types';
 import { ratingInProcent } from '../../utils';
 import { AppRoute } from '../../constants';
+import FavoriteIcon from '../favorite-icon/favorite-icon';
 
 type PlaceOffersProps = {
   placeOffer: PlaceOfferType;
@@ -18,11 +19,8 @@ const PremiumMark = (): JSX.Element => (
 );
 
 const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferHover}: PlaceOffersProps): JSX.Element => {
-  const {title, type: typeOfHousing, price, previewImage, isFavorite, rating, isPremium} = placeOffer;
+  const {title, type: typeOfHousing, price, previewImage, rating, isPremium} = placeOffer;
   const ratingStars = ratingInProcent(rating);
-  const favoriteClass = isFavorite
-    ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-    : 'place-card__bookmark-button button';
 
   const PlaceCardStyle = {
     FOR_ARTICLE: `${classNameCard }__card place-card`,
@@ -55,12 +53,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={favoriteClass} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref ="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoriteIcon nameIcon='place-card' widthIcon='18' heightIcon='19' />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

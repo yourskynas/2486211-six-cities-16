@@ -7,7 +7,7 @@ import { MapIcon } from '../../constants';
 
 type MapProps = {
   locationCity: LocationType;
-  offers: PlaceOfferType[] | null;
+  offers: PlaceOfferType[] | null | undefined;
   activeOffer?: string | undefined;
   classNameMap: string;
 }

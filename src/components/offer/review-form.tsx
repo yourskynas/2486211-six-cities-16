@@ -4,6 +4,7 @@ import OfferRating from './offer-rating';
 import { sendComment } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectIsOffersDataLoading } from '../../store/selectors';
+import { setOffersDataLoadingStatus } from '../../store/action';
 
 type ReviewFormProps = {
   offerId: string;
@@ -25,6 +26,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
   const [valueRating, setRating] = useState(0);
 
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectIsOffersDataLoading);
 
   const validTextarea = valueTextarea.length > CommentLengthLimit.MIN && valueTextarea.length < CommentLengthLimit.MAX;
   const validRating = valueRating !== 0;
@@ -41,6 +43,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    dispatch(setOffersDataLoadingStatus(true));
 
     if (validTextarea && validRating) {
       dispatch(sendComment({
@@ -51,13 +54,17 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
         .then((response) => {
           if (response.meta.requestStatus === 'fulfilled') {
             clearForm();
+            dispatch(setOffersDataLoadingStatus(false));
           }
+        })
+        .catch(() => {
+          dispatch(setOffersDataLoadingStatus(false));
         });
     }
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit} aria-disabled={isLoading}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <OfferRating onRatingClick={onRatingClick} valueRating={valueRating} />

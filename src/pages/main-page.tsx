@@ -8,7 +8,9 @@ import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
 import { sortingPlaces } from '../utils';
-import { selectCity, selectSortingStatus } from '../store/selectors';
+import { selectCity, selectError, selectIsOffersDataLoading, selectSortingStatus } from '../store/selectors';
+import Loading from '../components/empty-stubs/loading';
+import Error from '../components/empty-stubs/error';
 
 type MainProps = {
   cities: string[];
@@ -20,6 +22,8 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
 
   const sortingStatus = useAppSelector(selectSortingStatus);
   const currentCity = useAppSelector(selectCity);
+  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  const error = useAppSelector(selectError);
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
@@ -35,34 +39,40 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
 
   const classNameMainElement = groupedOffersByCity ? 'page__main page__main--index' : 'page__main page__main--index page__main--index-empty';
 
-  return (
-    <>
-      <Helmet>
-        <title>6 cities | Main </title>
-      </Helmet>
+  if (isOffersDataLoading) {
+    return <Loading />;
+  } else if (error && error !== 'Header Token is not correct') {
+    return <Error />;
+  } else {
+    return (
+      <>
+        <Helmet>
+          <title>6 cities | Main </title>
+        </Helmet>
 
-      <main className={classNameMainElement}>
-        <h1 className="visually-hidden">Cities</h1>
-        <LocationsList cities={cities} currentCity={currentCity}/>
-        <div className="cities">
-          {groupedOffersByCity
-            ? (
-              <div className="cities__places-container container">
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{groupedOffersByCity.length} places to stay in {currentCity}</b>
-                  <PlacesSorting />
-                  <div className="cities__places-list places__list tabs__content">
-                    {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
-                  </div>
-                </section>
-                <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} classNameMap={'cities'} />
-              </div>
-            ) : <EmptyMain city={currentCity} /> }
-        </div>
-      </main>
-    </>
-  );
+        <main className={classNameMainElement}>
+          <h1 className="visually-hidden">Cities</h1>
+          <LocationsList cities={cities} currentCity={currentCity}/>
+          <div className="cities">
+            {groupedOffersByCity
+              ? (
+                <div className="cities__places-container container">
+                  <section className="cities__places places">
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{groupedOffersByCity.length} places to stay in {currentCity}</b>
+                    <PlacesSorting />
+                    <div className="cities__places-list places__list tabs__content">
+                      {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
+                    </div>
+                  </section>
+                  <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} classNameMap={'cities'} />
+                </div>
+              ) : <EmptyMain city={currentCity} /> }
+          </div>
+        </main>
+      </>
+    );
+  }
 };
 
 export default MainPage;

@@ -12,15 +12,17 @@ import { useParams } from 'react-router-dom';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../components/hooks';
 import { useSelector } from 'react-redux';
-import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectNearbyOffers } from '../store/selectors';
-import NotFoundPage from './not-found-page';
+import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectError, selectNearbyOffers } from '../store/selectors';
 import CitiesMap from '../components/map/cities-map';
+import Error from '../components/empty-stubs/error';
+import FavoriteIcon from '../components/favorite-icon/favorite-icon';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();
   const offerId = params.id || '';
 
   const dispatch = useAppDispatch();
+  const error = useAppSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId))
@@ -37,8 +39,9 @@ const OfferPage = (): JSX.Element => {
   const reviews = useSelector(selectComments);
   const nearbyOffers = useSelector(selectNearbyOffers);
   const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, 3);
+  const offersForMap = currentOffer && slicedNearbyOffers?.concat(currentOffer);
 
-  return (currentOffer !== null) ?
+  return (currentOffer !== null && error === null) ?
     <>
       <Helmet>
         <title>6 cities | Offer </title>
@@ -61,12 +64,7 @@ const OfferPage = (): JSX.Element => {
                 <h1 className="offer__name">
                   {currentOffer.title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <FavoriteIcon nameIcon='offer' widthIcon='31' heightIcon='33' />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -101,14 +99,14 @@ const OfferPage = (): JSX.Element => {
               </section>
             </div>
           </div>
-          <CitiesMap locationCity={currentOffer.city.location} offers={slicedNearbyOffers} classNameMap={'offer'} />
+          <CitiesMap locationCity={currentOffer.city.location} offers={offersForMap} activeOffer={offerId} classNameMap={'offer'} />
         </section>
         <div className="container">
           {slicedNearbyOffers && <NearPlaces placeOffers={slicedNearbyOffers} />}
         </div>
       </main>
     </>
-    : <NotFoundPage /> ;
+    : <Error /> ;
 };
 
 export default OfferPage;
