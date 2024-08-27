@@ -6,20 +6,7 @@ import { OfferType, PlaceOfferType, ReviewType } from '../types';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from './types/auth-data';
 import { UserData } from './types/user-data';
-import { store } from '.';
-import { saveUserName, setError } from './main-process/main-process';
-
-const TIMEOUT_SHOW_ERROR = 2000;
-
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
+import { saveUserName } from './main-process/main-process';
 
 export const fetchOffersAction = createAsyncThunk<PlaceOfferType[], undefined, {
   dispatch: AppDispatch;
@@ -74,7 +61,7 @@ export const fetchFavoritesOffersAction = createAsyncThunk<PlaceOfferType[], und
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
+  'data/fetchFavoritesOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<PlaceOfferType[]>(APIRoute.FAVORITE);
     return data;
