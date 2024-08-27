@@ -3,20 +3,20 @@ import { CommentLengthLimit } from '../../constants';
 import OfferRating from './offer-rating';
 import { postComment } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectIsOffersDataLoading } from '../../store/offers-data/selectors';
+import { selectIsCommentPosting } from '../../store/offers-data/selectors';
 
 type ReviewFormProps = {
   offerId: string;
 }
 
 type Submit = {
-  disabledStatus: boolean;
+  isDisabled: boolean;
 }
 
-const Submit = ({disabledStatus}: Submit): JSX.Element => {
-  const isLoading = useAppSelector(selectIsOffersDataLoading);
+const Submit = ({isDisabled}: Submit): JSX.Element => {
+  const isCommentPosting = useAppSelector(selectIsCommentPosting);
   return (
-    <button className="reviews__submit form__submit button" type="submit" disabled={!disabledStatus || isLoading}>Submit</button>
+    <button className="reviews__submit form__submit button" type="submit" disabled={!isDisabled || isCommentPosting}>Submit</button>
   );
 };
 
@@ -25,11 +25,11 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
   const [valueRating, setRating] = useState(0);
 
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectIsOffersDataLoading);
+  const isCommentPosting = useAppSelector(selectIsCommentPosting);
 
   const validTextarea = valueTextarea.length > CommentLengthLimit.MIN && valueTextarea.length < CommentLengthLimit.MAX;
   const validRating = valueRating !== 0;
-  const disabledStatus = validTextarea && validRating;
+  const isDisabled = validTextarea && validRating && !isCommentPosting;
 
   const onRatingClick = (value: number) => {
     setRating(value);
@@ -64,7 +64,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit} aria-disabled={isLoading}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <OfferRating onRatingClick={onRatingClick} valueRating={valueRating} />
@@ -77,13 +77,14 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
         maxLength={CommentLengthLimit.MAX}
         value={valueTextarea}
         onChange={(e) => setTextarea(e.target.value)}
+        disabled={isCommentPosting}
       >
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentLengthLimit.MIN} characters</b>.
         </p>
-        {<Submit disabledStatus={disabledStatus}/>}
+        {<Submit isDisabled={isDisabled}/>}
       </div>
     </form>
   );

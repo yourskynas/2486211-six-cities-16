@@ -4,6 +4,8 @@ const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseld
 
 const DEFAULT_CITY = CITIES[0];
 
+const RATINGS = [5 , 4 , 3 , 2 , 1] as const;
+
 const PlacesOption = {
   POPULAR: 'Popular',
   PRICE_INCREASE: 'Price: low to high',
@@ -73,4 +75,12 @@ const NameSpace = {
   MAIN: 'MAIN',
 } as const;
 
-export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace};
+const RatingTitle = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
+} as const;
+
+export { CITIES, RATINGS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace, RatingTitle};
