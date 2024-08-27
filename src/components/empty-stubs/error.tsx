@@ -1,4 +1,4 @@
-import { selectError } from '../../store/selectors';
+import { selectError } from '../../store/main-process/selectors';
 import { useAppSelector } from '../hooks';
 
 const Error = () :JSX.Element => {

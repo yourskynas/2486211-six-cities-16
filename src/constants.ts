@@ -69,8 +69,8 @@ const TextErrorValidation = {
 
 const NameSpace = {
   USER: 'USER',
-  OFFER: 'OFFER',
-  FAVORITES: 'FAVORITES',
+  DATA: 'DATA',
+  MAIN: 'MAIN',
 } as const;
 
 export { CITIES, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace};

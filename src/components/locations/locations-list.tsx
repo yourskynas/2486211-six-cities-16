@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../constants';
 import { useAppDispatch } from '../hooks';
-import { changeCity } from '../../store/action';
 import { CityName } from '../../types';
+import { changeCity } from '../../store/main-process/main-process';
 
 type LocationsProps = {
   cities: typeof CITIES;

@@ -1,10 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { CommentLengthLimit } from '../../constants';
 import OfferRating from './offer-rating';
-import { sendComment } from '../../store/api-actions';
+import { postComment } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectIsOffersDataLoading } from '../../store/selectors';
-import { setOffersDataLoadingStatus } from '../../store/action';
+import { selectIsOffersDataLoading } from '../../store/offers-data/selectors';
 
 type ReviewFormProps = {
   offerId: string;
@@ -15,9 +14,9 @@ type Submit = {
 }
 
 const Submit = ({disabledStatus}: Submit): JSX.Element => {
-  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+  const isLoading = useAppSelector(selectIsOffersDataLoading);
   return (
-    <button className="reviews__submit form__submit button" type="submit" disabled={!disabledStatus || isOffersDataLoading}>Submit</button>
+    <button className="reviews__submit form__submit button" type="submit" disabled={!disabledStatus || isLoading}>Submit</button>
   );
 };
 
@@ -43,22 +42,23 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(setOffersDataLoadingStatus(true));
 
     if (validTextarea && validRating) {
-      dispatch(sendComment({
+      dispatch(postComment({
         id: offerId,
         comment: valueTextarea,
-        rating: valueRating
+        rating: valueRating,
+        date: '',
+        user: {
+          name: '',
+          avatarUrl: '',
+          isPro: false
+        }
       }))
         .then((response) => {
           if (response.meta.requestStatus === 'fulfilled') {
             clearForm();
-            dispatch(setOffersDataLoadingStatus(false));
           }
-        })
-        .catch(() => {
-          dispatch(setOffersDataLoadingStatus(false));
         });
     }
   };

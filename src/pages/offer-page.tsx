@@ -12,10 +12,12 @@ import { useParams } from 'react-router-dom';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../components/hooks';
 import { useSelector } from 'react-redux';
-import { selectAuthorizationStatus, selectComments, selectCurrentOffer, selectError, selectNearbyOffers } from '../store/selectors';
 import CitiesMap from '../components/map/cities-map';
 import Error from '../components/empty-stubs/error';
 import FavoriteIcon from '../components/favorite-icon/favorite-icon';
+import { selectError } from '../store/main-process/selectors';
+import { selectAuthorizationStatus } from '../store/user-process/selectors';
+import { selectComments, selectCurrentOffer, selectNearbyOffers } from '../store/offers-data/selectors';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();

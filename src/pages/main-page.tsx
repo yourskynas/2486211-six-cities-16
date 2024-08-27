@@ -8,9 +8,10 @@ import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
 import { sortingPlaces } from '../utils';
-import { selectCity, selectError, selectIsOffersDataLoading, selectSortingStatus } from '../store/selectors';
 import Loading from '../components/empty-stubs/loading';
 import Error from '../components/empty-stubs/error';
+import { selectCity, selectError, selectSortingStatus } from '../store/main-process/selectors';
+import { selectIsOffersDataLoading } from '../store/offers-data/selectors';
 
 type MainProps = {
   cities: string[];

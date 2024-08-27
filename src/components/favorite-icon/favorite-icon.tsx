@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-import { selectAuthorizationStatus } from '../../store/selectors';
 import { useAppSelector } from '../hooks';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type FavoriteIconType = {
   nameIcon: string;
