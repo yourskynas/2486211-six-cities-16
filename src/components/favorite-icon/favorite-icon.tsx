@@ -1,33 +1,42 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { changeFavoriteStatus } from '../../store/api-actions';
 
 type FavoriteIconType = {
   nameIcon: string;
   widthIcon: string;
   heightIcon: string;
+  isFavorite: boolean;
+  id: string;
 };
 
 const FavoriteIcon = (props: FavoriteIconType): JSX.Element => {
-  const { nameIcon, widthIcon, heightIcon } = props;
+  const { nameIcon, widthIcon, heightIcon, isFavorite, id } = props;
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const favoriteClass = isFavorite
-  //   ? 'place-card__bookmark-button place-card__bookmark-button--active button'
-  //   : 'place-card__bookmark-button button';
+  const favoriteClass = isFavorite
+    ? `${nameIcon}__bookmark-button ${nameIcon}__bookmark-button--active button`
+    : `${nameIcon}__bookmark-button button`;
   const handleButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
       navigate(AppRoute.LOGIN);
+    } else {
+      dispatch(changeFavoriteStatus({
+        id,
+        status: Number(!isFavorite)
+      }));
     }
   };
 
   return (
-    <button className={`${nameIcon}__bookmark-button button`} type="button" onClick={handleButtonClick}>
+    <button className={favoriteClass} type="button" onClick={handleButtonClick}>
       <svg className={`${nameIcon}__bookmark-icon`} width={widthIcon} height={heightIcon}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
-      <span className="visually-hidden">To bookmarks</span>
+      <span className="visually-hidden">{isFavorite ? 'From' : 'To'} bookmarks</span>
     </button>
   );
 };

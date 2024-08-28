@@ -83,4 +83,9 @@ const RatingTitle = {
   5: 'perfect',
 } as const;
 
-export { CITIES, RATINGS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace, RatingTitle};
+const FavoriteStatus = {
+  ADDED: 1,
+  REMOVED: 0
+} as const;
+
+export { CITIES, RATINGS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace, RatingTitle, FavoriteStatus};

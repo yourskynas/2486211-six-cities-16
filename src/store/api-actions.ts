@@ -7,6 +7,7 @@ import { dropToken, saveToken } from '../services/token';
 import { AuthData } from './types/auth-data';
 import { UserData } from './types/user-data';
 import { saveUserName } from './main-process/main-process';
+import { FavoritePayloadType } from './types/favorite-payload-data';
 
 export const fetchOffersAction = createAsyncThunk<PlaceOfferType[], undefined, {
   dispatch: AppDispatch;
@@ -113,4 +114,16 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.LOGOUT);
     dropToken();
   },
+);
+
+export const changeFavoriteStatus = createAsyncThunk<OfferType, FavoritePayloadType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favorites/changeFavoriteStatus',
+  async ({id, status}:FavoritePayloadType, { extra: api }) => {
+    const { data } = await api.post<OfferType>(`${APIRoute.FAVORITE}/${id}/${status}`);
+    return data;
+  }
 );

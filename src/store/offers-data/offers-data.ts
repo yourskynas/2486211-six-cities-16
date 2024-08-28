@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants';
-import { fetchCommentsAction, fetchFavoritesOffersAction, fetchNearbyOffersAction, fetchOfferAction, fetchOffersAction, postComment } from '../api-actions';
+import { changeFavoriteStatus, fetchCommentsAction, fetchFavoritesOffersAction, fetchNearbyOffersAction, fetchOfferAction, fetchOffersAction, postComment } from '../api-actions';
 import { OfferType, PlaceOfferType, ReviewType } from '../../types';
 
 type OffersData = {
@@ -120,6 +120,20 @@ export const offersData = createSlice({
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments.push(action.payload);
         state.isCommentPosting = false;
+      })
+      .addCase(changeFavoriteStatus.fulfilled, (state, action) => {
+        const index = state.offers.findIndex((item) => item.id === action.payload.id);
+        if (index !== -1) {
+          state.offers[index].isFavorite = action.payload.isFavorite;
+        }
+
+        state.currentOffer = action.payload;
+
+        if (action.payload.isFavorite) {
+          state.favoritesOffers.push(action.payload);
+        } else {
+          state.favoritesOffers = state.favoritesOffers.filter((item) => item.id !== action.payload.id);
+        }
       });
   }
 });

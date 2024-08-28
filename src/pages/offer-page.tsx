@@ -74,7 +74,7 @@ const OfferPage = (): JSX.Element => {
                 <h1 className="offer__name">
                   {currentOffer.title}
                 </h1>
-                <FavoriteIcon nameIcon='offer' widthIcon='31' heightIcon='33' />
+                <FavoriteIcon nameIcon='offer' widthIcon='31' heightIcon='33' isFavorite={currentOffer.isFavorite} id={currentOffer.id} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
