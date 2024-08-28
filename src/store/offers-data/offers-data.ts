@@ -10,11 +10,17 @@ type OffersData = {
   nearbyOffers: PlaceOfferType[] | null;
   favoritesOffers: PlaceOfferType[];
   isOffersDataLoading: boolean;
+  isOffersError: boolean;
   isOfferDataLoading: boolean;
+  isOfferError: boolean;
   isCommentDataLoading: boolean;
+  isCommentError: boolean;
   isNearbyOffersDataLoading: boolean;
+  isNearbyOffersError: boolean;
   isFavoriteOffersDataLoading: boolean;
+  isFavoriteOffersError: boolean;
   isCommentPosting: boolean;
+  isCommentPostingError: boolean;
 };
 
 const initialState: OffersData = {
@@ -24,11 +30,17 @@ const initialState: OffersData = {
   nearbyOffers: null,
   favoritesOffers: [],
   isOffersDataLoading: false,
+  isOffersError: false,
   isOfferDataLoading: false,
+  isOfferError: false,
   isCommentDataLoading: false,
+  isCommentError: false,
   isNearbyOffersDataLoading: false,
+  isNearbyOffersError: false,
   isFavoriteOffersDataLoading: false,
+  isFavoriteOffersError: false,
   isCommentPosting: false,
+  isCommentPostingError: false,
 };
 
 export const offersData = createSlice({
@@ -39,6 +51,11 @@ export const offersData = createSlice({
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.isOffersError = false;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        state.isOffersError = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
@@ -46,6 +63,11 @@ export const offersData = createSlice({
       })
       .addCase(fetchOfferAction.pending, (state) => {
         state.isOfferDataLoading = true;
+        state.isOfferError = false;
+      })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.isOfferDataLoading = false;
+        state.isOfferError = true;
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
@@ -53,6 +75,11 @@ export const offersData = createSlice({
       })
       .addCase(fetchCommentsAction.pending, (state) => {
         state.isCommentDataLoading = true;
+        state.isCommentError = false;
+      })
+      .addCase(fetchCommentsAction.rejected, (state) => {
+        state.isCommentDataLoading = false;
+        state.isCommentError = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
@@ -60,6 +87,11 @@ export const offersData = createSlice({
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
         state.isNearbyOffersDataLoading = true;
+        state.isNearbyOffersError = false;
+      })
+      .addCase(fetchNearbyOffersAction.rejected, (state) => {
+        state.isNearbyOffersDataLoading = false;
+        state.isNearbyOffersError = true;
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
@@ -67,6 +99,11 @@ export const offersData = createSlice({
       })
       .addCase(fetchFavoritesOffersAction.pending, (state) => {
         state.isFavoriteOffersDataLoading = true;
+        state.isFavoriteOffersError = false;
+      })
+      .addCase(fetchFavoritesOffersAction.rejected, (state) => {
+        state.isFavoriteOffersDataLoading = false;
+        state.isFavoriteOffersError = true;
       })
       .addCase(fetchFavoritesOffersAction.fulfilled, (state, action) => {
         state.favoritesOffers = action.payload;
@@ -74,6 +111,11 @@ export const offersData = createSlice({
       })
       .addCase(postComment.pending, (state) => {
         state.isCommentPosting = true;
+        state.isCommentPostingError = false;
+      })
+      .addCase(postComment.rejected, (state) => {
+        state.isCommentPosting = false;
+        state.isCommentPostingError = true;
       })
       .addCase(postComment.fulfilled, (state, action) => {
         state.comments.push(action.payload);

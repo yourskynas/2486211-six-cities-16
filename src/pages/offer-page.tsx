@@ -1,30 +1,32 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
+import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../store/api-actions';
+import { selectComments, selectCurrentOffer, selectIsOfferDataLoading, selectIsOfferError, selectNearbyOffers } from '../store/offers-data/selectors';
+import { selectAuthorizationStatus } from '../store/user-process/selectors';
+import { useAppDispatch, useAppSelector } from '../components/hooks';
+import NearPlaces from '../components/offer/near-places';
 import OfferImages from '../components/offer/offer-images';
 import OfferInsideList from '../components/offer/offer-inside-list';
-import NearPlaces from '../components/offer/near-places';
-import { ratingInProcent } from '../utils';
 import OfferHost from '../components/offer/offer-host';
 import Reviews from '../components/offer/reviews';
 import ReviewForm from '../components/offer/review-form';
-import { AuthorizationStatus } from '../constants';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferAction } from '../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../components/hooks';
-import { useSelector } from 'react-redux';
 import CitiesMap from '../components/map/cities-map';
 import Error from '../components/empty-stubs/error';
 import FavoriteIcon from '../components/favorite-icon/favorite-icon';
-import { selectError } from '../store/main-process/selectors';
-import { selectAuthorizationStatus } from '../store/user-process/selectors';
-import { selectComments, selectCurrentOffer, selectNearbyOffers } from '../store/offers-data/selectors';
+import Loading from '../components/empty-stubs/loading';
+import NotFoundPage from './not-found-page';
+import { ratingInProcent } from '../utils';
+import { AuthorizationStatus } from '../constants';
 
 const OfferPage = (): JSX.Element => {
   const params = useParams();
   const offerId = params.id || '';
 
   const dispatch = useAppDispatch();
-  const error = useAppSelector(selectError);
+  const isError = useAppSelector(selectIsOfferError);
+  const isLoading = useAppSelector(selectIsOfferDataLoading);
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId))
@@ -43,7 +45,13 @@ const OfferPage = (): JSX.Element => {
   const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, 3);
   const offersForMap = currentOffer && slicedNearbyOffers?.concat(currentOffer);
 
-  return (currentOffer !== null && error === null) ?
+  if (isError) {
+    return <Error />;
+  } else if (isLoading) {
+    return <Loading />;
+  }
+
+  return (currentOffer !== null) ?
     <>
       <Helmet>
         <title>6 cities | Offer </title>
@@ -108,7 +116,7 @@ const OfferPage = (): JSX.Element => {
         </div>
       </main>
     </>
-    : <Error /> ;
+    : <NotFoundPage /> ;
 };
 
 export default OfferPage;
