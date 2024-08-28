@@ -31,6 +31,7 @@ const CitiesMap = ({locationCity, offers, activeOffer, classNameMap}: MapProps):
 
   useEffect(() => {
     if (map && offers) {
+      markerLayer.current.clearLayers();
       offers.forEach((offer) => {
         leaflet.marker({
           lat: offer.location.latitude,
@@ -38,7 +39,7 @@ const CitiesMap = ({locationCity, offers, activeOffer, classNameMap}: MapProps):
         }, {
           icon: offer.id === activeOffer ? currentCustomIcon : defaultCustomIcon,
         })
-          .addTo(map);
+          .addTo(markerLayer.current);
       });
     }
   }, [map, offers, activeOffer]);

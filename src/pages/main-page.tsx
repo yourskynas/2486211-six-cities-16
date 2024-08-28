@@ -8,9 +8,10 @@ import CitiesMap from '../components/map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
 import { sortingPlaces } from '../utils';
-import { selectCity, selectError, selectIsOffersDataLoading, selectSortingStatus } from '../store/selectors';
 import Loading from '../components/empty-stubs/loading';
 import Error from '../components/empty-stubs/error';
+import { selectCity, selectError, selectSortingStatus } from '../store/main-process/selectors';
+import { selectIsOfferError, selectIsOffersDataLoading } from '../store/offers-data/selectors';
 
 type MainProps = {
   cities: string[];
@@ -24,6 +25,7 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
   const currentCity = useAppSelector(selectCity);
   const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
   const error = useAppSelector(selectError);
+  const isError = useAppSelector(selectIsOfferError);
 
   const handleArticleMouseEnter = (value: string) => {
     setActiveOffer(value);
@@ -41,7 +43,7 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
 
   if (isOffersDataLoading) {
     return <Loading />;
-  } else if (error && error !== 'Header Token is not correct') {
+  } else if (error && isError) {
     return <Error />;
   } else {
     return (
@@ -65,7 +67,9 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
                       {groupedOffersByCity.map((offer) => <PlaceCard key={offer.id} placeOffer={offer} classNameCard={'cities'} imageWidth='260' imageHeight='200' onOfferHover={handleArticleMouseEnter}/>)}
                     </div>
                   </section>
-                  <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} classNameMap={'cities'} />
+                  <div className="cities__right-section">
+                    <CitiesMap locationCity={locationCurrentCity} offers={groupedOffersByCity} activeOffer={activeOffer} classNameMap={'cities'} />
+                  </div>
                 </div>
               ) : <EmptyMain city={currentCity} /> }
           </div>

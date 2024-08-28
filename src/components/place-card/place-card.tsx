@@ -19,7 +19,7 @@ const PremiumMark = (): JSX.Element => (
 );
 
 const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferHover}: PlaceOffersProps): JSX.Element => {
-  const {title, type: typeOfHousing, price, previewImage, rating, isPremium} = placeOffer;
+  const {title, type: typeOfHousing, price, previewImage, rating, isPremium, isFavorite, id} = placeOffer;
   const ratingStars = ratingInProcent(rating);
 
   const PlaceCardStyle = {
@@ -27,9 +27,9 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
     FOR_DIV: `${classNameCard }__image-wrapper place-card__image-wrapper`
   };
 
-  const handleCardMouseEnter = (id: string): void => {
+  const handleCardMouseEnter = (idCard: string): void => {
     if (onOfferHover) {
-      onOfferHover(id);
+      onOfferHover(idCard);
     }
   };
 
@@ -53,7 +53,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteIcon nameIcon='place-card' widthIcon='18' heightIcon='19' />
+          <FavoriteIcon nameIcon='place-card' widthIcon='18' heightIcon='19' isFavorite={isFavorite} id={id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -10,7 +10,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
 import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectAuthorizationStatus, selectFavoritesOffers, selectOffers } from '../../store/selectors';
+import { selectFavoritesOffers, selectOffers } from '../../store/offers-data/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 
 type AppProps = {
   cities: string[];

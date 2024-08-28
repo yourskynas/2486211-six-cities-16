@@ -1,4 +1,9 @@
 import { store } from '..';
+import { AuthorizationStatus } from '../../constants';
+
+export type UserProcess = {
+  authorizationStatus: keyof typeof AuthorizationStatus;
+};
 
 export type State = ReturnType<typeof store.getState>;
 

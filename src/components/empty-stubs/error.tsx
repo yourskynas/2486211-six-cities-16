@@ -1,5 +1,7 @@
-import { selectError } from '../../store/selectors';
+import { Link } from 'react-router-dom';
+import { selectError } from '../../store/main-process/selectors';
 import { useAppSelector } from '../hooks';
+import { AppRoute } from '../../constants';
 
 const Error = () :JSX.Element => {
   const error = useAppSelector(selectError);
@@ -11,7 +13,8 @@ const Error = () :JSX.Element => {
             <h1 className="visually-hidden">Error</h1>
             <div className="favorites__status-wrapper">
               <b className="favorites__status">Error</b>
-              <p className="favorites__status-description">{error}</p>
+              <Link to={AppRoute.DEFAULT_MAIN} className="login__submit form__submit button" style={{marginTop: 5}}>Перейти на главную</Link>
+              <p className="favorites__status-description" style={{fontSize: 12, color: 'red', marginTop: 5}}>{error}</p>
             </div>
           </section>
         </div>

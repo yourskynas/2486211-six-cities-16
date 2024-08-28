@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { PlacesOption } from '../../constants';
-import { getSortingStatus } from '../../store/action';
 import { PlacesOptionKey } from '../../types';
-import { selectSortingStatus } from '../../store/selectors';
+import { selectSortingStatus } from '../../store/main-process/selectors';
+import { getSortingStatus } from '../../store/main-process/main-process';
 
 type OptionProps = {
   option: PlacesOptionKey;

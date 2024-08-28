@@ -4,7 +4,7 @@ import Logo from '../logo/logo';
 import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../hooks';
 import { useSelector } from 'react-redux';
-import { selectUserName } from '../../store/selectors';
+import { selectUserName } from '../../store/main-process/selectors';
 
 type HeaderProps = {
   authorizationStatus?: keyof typeof AuthorizationStatus;
