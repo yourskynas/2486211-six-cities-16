@@ -1,36 +1,24 @@
 import { NameSpace } from '../../constants';
 import { Selector } from '../types/state';
 
-export const selectOffers = (state: Selector) => state[NameSpace.DATA].offers;
+export const selectOffers = (state: Selector) => state[NameSpace.Data].offers;
 
-export const selectCurrentOffer = (state: Selector) => state[NameSpace.DATA].currentOffer;
+export const selectCurrentOffer = (state: Selector) => state[NameSpace.Data].currentOffer;
 
-export const selectComments = (state: Selector) => state[NameSpace.DATA].comments;
+export const selectComments = (state: Selector) => state[NameSpace.Data].comments;
 
-export const selectNearbyOffers = (state: Selector) => state[NameSpace.DATA].nearbyOffers;
+export const selectNearbyOffers = (state: Selector) => state[NameSpace.Data].nearbyOffers;
 
-export const selectFavoritesOffers = (state: Selector) => state[NameSpace.DATA].favoritesOffers;
+export const selectFavoritesOffers = (state: Selector) => state[NameSpace.Data].favoritesOffers;
 
-export const selectIsOffersDataLoading = (state: Selector) => state[NameSpace.DATA].isOffersDataLoading;
+export const selectIsOffersDataLoading = (state: Selector) => state[NameSpace.Data].isOffersDataLoading;
 
-export const selectIsOfferDataLoading = (state: Selector) => state[NameSpace.DATA].isOfferDataLoading;
+export const selectIsOfferDataLoading = (state: Selector) => state[NameSpace.Data].isOfferDataLoading;
 
-export const selectIsCommentDataLoading = (state: Selector) => state[NameSpace.DATA].isCommentDataLoading;
+export const selectIsFavoriteOffersDataLoading = (state: Selector) => state[NameSpace.Data].isFavoriteOffersDataLoading;
 
-export const selectIsNearbyOffersDataLoading = (state: Selector) => state[NameSpace.DATA].isNearbyOffersDataLoading;
+export const selectIsCommentPosting = (state: Selector) => state[NameSpace.Data].isCommentPosting;
 
-export const selectIsFavoriteOffersDataLoading = (state: Selector) => state[NameSpace.DATA].isFavoriteOffersDataLoading;
+export const selectIsOfferError = (state: Selector) => state[NameSpace.Data].isOfferError;
 
-export const selectIsCommentPosting = (state: Selector) => state[NameSpace.DATA].isCommentPosting;
-
-export const selectIsOffersError = (state: Selector) => state[NameSpace.DATA].isOffersError;
-
-export const selectIsOfferError = (state: Selector) => state[NameSpace.DATA].isOfferError;
-
-export const selectIsCommentError = (state: Selector) => state[NameSpace.DATA].isCommentError;
-
-export const selectIsNearbyOffersError = (state: Selector) => state[NameSpace.DATA].isNearbyOffersError;
-
-export const selectIsFavoriteOffersError = (state: Selector) => state[NameSpace.DATA].isFavoriteOffersError;
-
-export const selectIsCommentPostingError = (state: Selector) => state[NameSpace.DATA].isCommentPostingError;
+export const selectIsFavoriteOffersError = (state: Selector) => state[NameSpace.Data].isFavoriteOffersError;

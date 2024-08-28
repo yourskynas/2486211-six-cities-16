@@ -7,72 +7,72 @@ const DEFAULT_CITY = CITIES[0];
 const RATINGS = [5 , 4 , 3 , 2 , 1] as const;
 
 const PlacesOption = {
-  POPULAR: 'Popular',
-  PRICE_INCREASE: 'Price: low to high',
-  PRICE_REDUCTION: 'Price: high to low',
-  TOP_RATED: 'Top rated first',
+  Popular: 'Popular',
+  PriceIncrease: 'Price: low to high',
+  PriceReduction: 'Price: high to low',
+  TopRated: 'Top rated first',
 } as const;
 
 const CommentLengthLimit = {
-  MIN: 50,
-  MAX: 300
+  Min: 50,
+  Max: 300
 } as const;
 
 const AppRoute = {
-  DEFAULT_MAIN: '/city/paris',
-  MAIN: (cityName: string) => `/city/${cityName.toLowerCase()}`,
-  LOGIN: '/login',
-  FAVORITES: '/favorites',
-  OFFER: '/offer/:id',
+  DefaultMain: '/city/paris',
+  Main: (cityName: string) => `/city/${cityName.toLowerCase()}`,
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id',
 } as const;
 
 const AuthorizationStatus = {
-  AUTH: 'AUTH',
-  NO_AUTH: 'NO_AUTH',
-  UNKNOWN: 'UNKNOWN',
+  Auth: 'Auth',
+  NoAuth: 'NoAuth',
+  Unknown: 'Unknown',
 } as const;
 
 const UrlMarker = {
-  DEFAULT: 'img/pin.svg',
-  CURRENT: 'img/pin-active.svg'
+  Default: 'img/pin.svg',
+  Current: 'img/pin-active.svg'
 } as const;
 
 const MapIcon: MapIconsReadonly = {
-  DEFAULT: {
-    iconUrl: UrlMarker.DEFAULT,
+  Default: {
+    iconUrl: UrlMarker.Default,
     iconSize: [27, 40],
     iconAnchor: [13, 40],
   },
-  CURRENT: {
-    iconUrl: UrlMarker.CURRENT,
+  Current: {
+    iconUrl: UrlMarker.Current,
     iconSize: [27, 40],
     iconAnchor: [13, 40],
   }
 };
 
 const TileLayer: TileLayerType = {
-  URL: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-  ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  Url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  Attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 } as const;
 
 const APIRoute = {
-  OFFERS: '/offers',
-  FAVORITE: '/favorite',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
-  COMMENTS: '/comments',
+  Offers: '/offers',
+  Favorite: '/favorite',
+  Login: '/login',
+  Logout: '/logout',
+  Comments: '/comments',
 } as const;
 
 const TextErrorValidation = {
-  NO_LETTER: 'Введите хотя бы одну букву',
-  NO_NUMBER: 'Введите хотя бы одну цифру',
-  NO_SPACE: 'Не должно быть пробелов'
+  NoLetter: 'Введите хотя бы одну букву',
+  NoNumber: 'Введите хотя бы одну цифру',
+  NoSpace: 'Не должно быть пробелов'
 } as const;
 
 const NameSpace = {
-  USER: 'USER',
-  DATA: 'DATA',
-  MAIN: 'MAIN',
+  User: 'USER',
+  Data: 'DATA',
+  Main: 'MAIN',
 } as const;
 
 const RatingTitle = {
@@ -83,9 +83,4 @@ const RatingTitle = {
   5: 'perfect',
 } as const;
 
-const FavoriteStatus = {
-  ADDED: 1,
-  REMOVED: 0
-} as const;
-
-export { CITIES, RATINGS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace, RatingTitle, FavoriteStatus};
+export { CITIES, RATINGS, CommentLengthLimit, AppRoute, AuthorizationStatus, DEFAULT_CITY, MapIcon, TileLayer, PlacesOption, APIRoute, TextErrorValidation, NameSpace, RatingTitle};

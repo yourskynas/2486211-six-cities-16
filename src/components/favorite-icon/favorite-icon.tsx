@@ -21,8 +21,8 @@ const FavoriteIcon = (props: FavoriteIconType): JSX.Element => {
     ? `${nameIcon}__bookmark-button ${nameIcon}__bookmark-button--active button`
     : `${nameIcon}__bookmark-button button`;
   const handleButtonClick = () => {
-    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      navigate(AppRoute.LOGIN);
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
     } else {
       dispatch(changeFavoriteStatus({
         id,

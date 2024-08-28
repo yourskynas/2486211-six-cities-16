@@ -13,7 +13,7 @@ const Error = () :JSX.Element => {
             <h1 className="visually-hidden">Error</h1>
             <div className="favorites__status-wrapper">
               <b className="favorites__status">Error</b>
-              <Link to={AppRoute.DEFAULT_MAIN} className="login__submit form__submit button" style={{marginTop: 5}}>Перейти на главную</Link>
+              <Link to={AppRoute.DefaultMain} className="login__submit form__submit button" style={{marginTop: 5}}>Перейти на главную</Link>
               <p className="favorites__status-description" style={{fontSize: 12, color: 'red', marginTop: 5}}>{error}</p>
             </div>
           </section>

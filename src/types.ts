@@ -54,15 +54,15 @@ export type MapIconType = {
 }
 
 export type MapIconsType = {
-  DEFAULT: MapIconType;
-  CURRENT: MapIconType;
+  Default: MapIconType;
+  Current: MapIconType;
 };
 
 export type MapIconsReadonly = Readonly<MapIconsType>;
 
 export type TileLayerType = {
-  URL: string;
-  ATTRIBUTION: string;
+  Url: string;
+  Attribution: string;
 }
 
 export type PlacesOptionKey = typeof PlacesOption[keyof typeof PlacesOption];

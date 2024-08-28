@@ -22,7 +22,7 @@ const LocationsItem = ({ city, currentCity }: LocationItemProps): JSX.Element =>
     : 'locations__item-link tabs__item';
   return (
     <li onClick={() => dispatch(changeCity(city))} className="locations__item">
-      <Link className={classCityItem} to={AppRoute.MAIN(city.toLowerCase())}>
+      <Link className={classCityItem} to={AppRoute.Main(city.toLowerCase())}>
         <span>{city}</span>
       </Link>
     </li>

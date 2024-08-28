@@ -27,7 +27,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const isCommentPosting = useAppSelector(selectIsCommentPosting);
 
-  const validTextarea = valueTextarea.length > CommentLengthLimit.MIN && valueTextarea.length < CommentLengthLimit.MAX;
+  const validTextarea = valueTextarea.length > CommentLengthLimit.Min && valueTextarea.length < CommentLengthLimit.Max;
   const validRating = valueRating !== 0;
   const isDisabled = validTextarea && validRating && !isCommentPosting;
 
@@ -74,7 +74,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
         id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         required
-        maxLength={CommentLengthLimit.MAX}
+        maxLength={CommentLengthLimit.Max}
         value={valueTextarea}
         onChange={(e) => setTextarea(e.target.value)}
         disabled={isCommentPosting}
@@ -82,7 +82,7 @@ const ReviewForm = ({offerId}: ReviewFormProps): JSX.Element => {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentLengthLimit.MIN} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentLengthLimit.Min} characters</b>.
         </p>
         {<Submit isDisabled={isDisabled}/>}
       </div>

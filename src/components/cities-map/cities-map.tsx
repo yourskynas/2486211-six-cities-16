@@ -11,9 +11,9 @@ type MapProps = {
   activeOffer?: string | undefined;
   classNameMap: string;
 }
-const defaultCustomIcon = new Icon(MapIcon.DEFAULT);
+const defaultCustomIcon = new Icon(MapIcon.Default);
 
-const currentCustomIcon = new Icon(MapIcon.CURRENT);
+const currentCustomIcon = new Icon(MapIcon.Current);
 
 const CitiesMap = ({locationCity, offers, activeOffer, classNameMap}: MapProps): JSX.Element => {
   const mapRef = useRef(null);

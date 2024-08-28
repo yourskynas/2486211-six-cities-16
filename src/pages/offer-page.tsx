@@ -12,7 +12,7 @@ import OfferInsideList from '../components/offer/offer-inside-list';
 import OfferHost from '../components/offer/offer-host';
 import Reviews from '../components/offer/reviews';
 import ReviewForm from '../components/offer/review-form';
-import CitiesMap from '../components/map/cities-map';
+import CitiesMap from '../components/cities-map/cities-map';
 import Error from '../components/empty-stubs/error';
 import FavoriteIcon from '../components/favorite-icon/favorite-icon';
 import Loading from '../components/empty-stubs/loading';
@@ -105,7 +105,7 @@ const OfferPage = (): JSX.Element => {
               <OfferHost description={currentOffer.description} host={currentOffer.host} />
               <section className="offer__reviews reviews">
                 {reviews && <Reviews reviews={reviews} />}
-                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offerId} /> : ''}
+                {authorizationStatus === AuthorizationStatus.Auth ? <ReviewForm offerId={offerId} /> : ''}
               </section>
             </div>
           </div>

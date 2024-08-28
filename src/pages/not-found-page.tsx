@@ -23,12 +23,12 @@ const NotFoundPage = (): JSX.Element => (
         <section className="login">
           <h1 className="login__title">404 | Страница не найдена</h1>
           <div className="login__form form">
-            <Link to={AppRoute.DEFAULT_MAIN} className="login__submit form__submit button">Перейти на главную</Link>
+            <Link to={AppRoute.DefaultMain} className="login__submit form__submit button">Перейти на главную</Link>
           </div>
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link className="locations__item-link" to={AppRoute.DEFAULT_MAIN}>
+            <Link className="locations__item-link" to={AppRoute.DefaultMain}>
               <span>Amsterdam</span>
             </Link>
           </div>

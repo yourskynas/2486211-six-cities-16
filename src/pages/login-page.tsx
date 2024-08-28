@@ -57,17 +57,17 @@ const LoginPage = (): JSX.Element => {
 
     if (password && !letterRegex.test(password)) {
       error = true;
-      setErrorText(TextErrorValidation.NO_LETTER);
+      setErrorText(TextErrorValidation.NoLetter);
     }
 
     if (password && !digitRegex.test(password)) {
       error = true;
-      setErrorText(TextErrorValidation.NO_NUMBER);
+      setErrorText(TextErrorValidation.NoNumber);
     }
 
     if (password && password.includes(' ')) {
       error = true;
-      setErrorText(TextErrorValidation.NO_SPACE);
+      setErrorText(TextErrorValidation.NoSpace);
     }
 
     return error;
@@ -113,7 +113,7 @@ const LoginPage = (): JSX.Element => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.DEFAULT_MAIN}>
+              <Link className="locations__item-link" to={AppRoute.DefaultMain}>
                 <span>Amsterdam</span>
               </Link>
             </div>

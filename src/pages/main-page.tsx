@@ -1,10 +1,10 @@
 import { CityName, PlaceOfferType } from '../types';
-import LocationsList from '../components/locations/locations-list';
+import LocationsList from '../components/locations-list/locations-list';
 import PlaceCard from '../components/place-card/place-card';
 import PlacesSorting from '../components/places-sorting/places-sorting';
 import { Helmet } from 'react-helmet-async';
 import EmptyMain from '../components/empty-stubs/empty-main';
-import CitiesMap from '../components/map/cities-map';
+import CitiesMap from '../components/cities-map/cities-map';
 import { useState } from 'react';
 import { useAppSelector } from '../components/hooks';
 import { sortingPlaces } from '../utils';
@@ -60,7 +60,7 @@ const MainPage = ({ cities, groupedOffersByCities}: MainProps): JSX.Element => {
               ? (
                 <div className="cities__places-container container">
                   <section className="cities__places places">
-                    <h2 className="visually-hidden">Places</h2>
+                    <h2 className="visually-hidden">{groupedOffersByCity.length === 1 ? 'Place' : 'Places'}</h2>
                     <b className="places__found">{groupedOffersByCity.length} places to stay in {currentCity}</b>
                     <PlacesSorting />
                     <div className="cities__places-list places__list tabs__content">

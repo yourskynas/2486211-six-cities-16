@@ -28,10 +28,10 @@ const groupByCity = (offers: PlaceOfferType[], isFavoritePage = false) => offers
 }, {});
 
 const sortingPlaces: Record<PlacesOptionKey, (offers: PlaceOfferType[]) => PlaceOfferType[]> = {
-  [PlacesOption.POPULAR]: (offers: PlaceOfferType[]) => offers,
-  [PlacesOption.PRICE_INCREASE]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerA.price - offerB.price),
-  [PlacesOption.PRICE_REDUCTION]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.price - offerA.price),
-  [PlacesOption.TOP_RATED]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.rating - offerA.rating),
+  [PlacesOption.Popular]: (offers: PlaceOfferType[]) => offers,
+  [PlacesOption.PriceIncrease]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerA.price - offerB.price),
+  [PlacesOption.PriceReduction]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.price - offerA.price),
+  [PlacesOption.TopRated]: (offers: PlaceOfferType[]) => offers.sort((offerA, offerB) => offerB.rating - offerA.rating),
 };
 
 export { ratingInProcent, humanizingDate, groupByCity, sortingPlaces };

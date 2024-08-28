@@ -18,8 +18,8 @@ const useMap = (mapRef: React.RefObject<HTMLElement | null>, locationCity: Locat
       });
 
       leaflet
-        .tileLayer(TileLayer.URL, {
-          attribution: TileLayer.ATTRIBUTION,
+        .tileLayer(TileLayer.Url, {
+          attribution: TileLayer.Attribution,
         },
         )
         .addTo(instance);

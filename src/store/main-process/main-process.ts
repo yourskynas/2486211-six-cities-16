@@ -11,13 +11,13 @@ type MainState = {
 
 const initialState: MainState = {
   city: DEFAULT_CITY,
-  sorting: PlacesOption.POPULAR,
+  sorting: PlacesOption.Popular,
   error: null,
   userName: null,
 };
 
 export const mainProcess = createSlice({
-  name: NameSpace.MAIN,
+  name: NameSpace.Main,
   initialState,
   reducers: {
     changeCity: (state, action: PayloadAction<string>) => {

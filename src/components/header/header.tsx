@@ -13,9 +13,12 @@ type HeaderProps = {
 
 type NavigateForUserProps = {
   favoritesOffersCount?: number;
+  url: typeof AppRoute.DefaultMain | typeof AppRoute.Login;
 }
 
-const NavigateForUser = ({favoritesOffersCount}: NavigateForUserProps): JSX.Element => {
+type PathnameType = typeof AppRoute[keyof typeof AppRoute];
+
+const NavigateForUser = ({favoritesOffersCount, url}: NavigateForUserProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const userName = useSelector(selectUserName);
   const handleLoginClick = () => {
@@ -24,7 +27,7 @@ const NavigateForUser = ({favoritesOffersCount}: NavigateForUserProps): JSX.Elem
   return (
     <>
       <li className="header__nav-item user">
-        <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
+        <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__user-name user__name">{userName}</span>
@@ -32,7 +35,7 @@ const NavigateForUser = ({favoritesOffersCount}: NavigateForUserProps): JSX.Elem
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link className="header__nav-link" to={AppRoute.LOGIN}>
+        <Link className="header__nav-link" to={url}>
           <span className="header__signout" onClick={handleLoginClick}>Sign out</span>
         </Link>
       </li>
@@ -42,7 +45,7 @@ const NavigateForUser = ({favoritesOffersCount}: NavigateForUserProps): JSX.Elem
 
 const NavigateForLogin = (): JSX.Element => (
   <li className="header__nav-item user">
-    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.LOGIN}>
+    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
       <div className="header__avatar-wrapper user__avatar-wrapper">
       </div>
       <span className="header__login">Sign in</span>
@@ -50,21 +53,26 @@ const NavigateForLogin = (): JSX.Element => (
   </li>
 );
 
-const Header = ({authorizationStatus, favoritesOffersCount}: HeaderProps): JSX.Element => (
-  <header className="header">
-    <div className="container">
-      <div className="header__wrapper">
-        <div className="header__left">
-          <Logo />
+const Header = ({authorizationStatus, favoritesOffersCount}: HeaderProps): JSX.Element => {
+  const url = location.pathname as PathnameType === AppRoute.Favorites
+    ? AppRoute.Login
+    : AppRoute.DefaultMain;
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header__wrapper">
+          <div className="header__left">
+            <Logo />
+          </div>
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              {authorizationStatus === AuthorizationStatus.Auth ? <NavigateForUser favoritesOffersCount={favoritesOffersCount} url={url} /> : <NavigateForLogin />}
+            </ul>
+          </nav>
         </div>
-        <nav className="header__nav">
-          <ul className="header__nav-list">
-            {authorizationStatus === AuthorizationStatus.AUTH ? <NavigateForUser favoritesOffersCount={favoritesOffersCount} /> : <NavigateForLogin />}
-          </ul>
-        </nav>
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 export default Header;

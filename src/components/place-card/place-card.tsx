@@ -43,7 +43,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
     <article className={PlaceCardStyle.FOR_ARTICLE} onMouseLeave={() => handleCardMouseLeave()} onMouseEnter={() => handleCardMouseEnter(placeOffer.id)}>
       {isPremium ? <PremiumMark /> : ''}
       <div className={PlaceCardStyle.FOR_DIV}>
-        <Link to={generatePath(AppRoute.OFFER, { id: placeOffer.id })}>
+        <Link to={generatePath(AppRoute.Offer, { id: placeOffer.id })}>
           <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt="Place image"/>
         </Link>
       </div>
@@ -62,7 +62,7 @@ const PlaceCard = ({placeOffer, classNameCard, imageWidth, imageHeight, onOfferH
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(AppRoute.OFFER, { id: placeOffer.id })}>{title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: placeOffer.id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{typeOfHousing}</p>
       </div>

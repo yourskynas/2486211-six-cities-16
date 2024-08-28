@@ -16,7 +16,7 @@ const Logo = ({classNameLogo = 'header__logo', imageWidth = '81', imageHeight = 
 
   return (
     // {не уводит на страницу главную, если нажимать на лого на странице авторизации}
-    <Link to={AppRoute.DEFAULT_MAIN} className={LogoStyle.FOR_LINK}>
+    <Link to={AppRoute.DefaultMain} className={LogoStyle.FOR_LINK}>
       <img className={classNameLogo} src="img/logo.svg" alt="6 cities logo" width={LogoStyle.FOR_IMAGE_WIDTH} height={LogoStyle.FOR_IMAGE_HEIGHT}/>
     </Link>
   );

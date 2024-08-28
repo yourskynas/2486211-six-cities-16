@@ -10,8 +10,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import TemplatePage from '../../pages/template-page';
 import { useAppSelector } from '../hooks';
 import { groupByCity } from '../../utils';
-import { selectFavoritesOffers, selectOffers } from '../../store/offers-data/selectors';
+import { selectFavoritesOffers, selectIsOffersDataLoading, selectOffers } from '../../store/offers-data/selectors';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import Loading from '../empty-stubs/loading';
 
 type AppProps = {
   cities: string[];
@@ -21,13 +22,18 @@ const App = ({cities}: AppProps): JSX.Element => {
   const offers = useAppSelector(selectOffers);
   const favoritesOffers = useAppSelector(selectFavoritesOffers);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(selectIsOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return <Loading />;
+  }
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<TemplatePage authorizationStatus={authorizationStatus} favoritesOffersCount={favoritesOffers.length} />}>
-            <Route index element={<Navigate to={AppRoute.DEFAULT_MAIN} />} />
+            <Route index element={<Navigate to={AppRoute.DefaultMain} />} />
             {CITIES.map((city) => (
               <Route path={`city/${city.toLowerCase()}`}
                 key={city} element={
@@ -39,15 +45,15 @@ const App = ({cities}: AppProps): JSX.Element => {
               />
             ))}
             <Route
-              path={AppRoute.OFFER}
+              path={AppRoute.Offer}
               element={
                 <OfferPage />
               }
             />
             <Route
-              path={AppRoute.FAVORITES}
+              path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={authorizationStatus} >
+                <PrivateRoute>
                   <FavoritesPage favoritesOffers={favoritesOffers} />
                 </PrivateRoute>
               }
@@ -55,8 +61,12 @@ const App = ({cities}: AppProps): JSX.Element => {
           </Route>
 
           <Route
-            path={AppRoute.LOGIN}
-            element={<LoginPage />}
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute forNonAuthOnly>
+                <LoginPage />
+              </PrivateRoute>
+            }
           />
           <Route
             path="*"
