@@ -16,7 +16,7 @@ import CitiesMap from '../components/cities-map/cities-map';
 import Error from '../components/empty-stubs/error';
 import FavoriteIcon from '../components/favorite-icon/favorite-icon';
 import Loading from '../components/empty-stubs/loading';
-import NotFoundPage from './not-found-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import { ratingInProcent } from '../utils';
 import { AuthorizationStatus } from '../constants';
 

@@ -9,6 +9,7 @@ import { useAppSelector } from '../components/hooks';
 import { selectIsFavoriteOffersDataLoading, selectIsFavoriteOffersError } from '../store/offers-data/selectors';
 import Loading from '../components/empty-stubs/loading';
 import Error from '../components/empty-stubs/error';
+import { Link } from 'react-router-dom';
 
 type FavoritesProps = {
   favoritesOffers: PlaceOfferType[];
@@ -24,9 +25,9 @@ const FavoriteItem = ({city, offers}: FavoriteItemProps): JSX.Element => (
   <li className="favorites__locations-items">
     <div className="favorites__locations locations locations--current">
       <div className="locations__item">
-        <a className="locations__item-link" href="#">
+        <Link className="locations__item-link" to="#">
           <span>{city}</span>
-        </a>
+        </Link>
       </div>
     </div>
     <div className="favorites__places">
